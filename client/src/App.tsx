@@ -1,24 +1,27 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import './App.scss';
+import { Navigate, Route, Routes } from 'react-router-dom';
+import SignUpPage from './pages/authPages/signUpPage/SignUpPage';
+import SignInPage from './pages/authPages/signInPage/SignInPage';
+import HomePage from './pages/homePage/HomePage';
+import Header from './components/common/headers/Header';
+import SideBar from './components/sideBar/SideBar';
+import { useAppSelector } from './store/StoreHooks';
 
 function App() {
+  const {toggleSideBar} = useAppSelector(state => state.settings)
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header />
+      <SideBar />
+      <div style={{paddingLeft: toggleSideBar ? '34%' : '8%'}}>
+        <Routes>
+            <Route path='/signUp' element={<SignUpPage />} />
+            <Route path='/signIn' element={<SignInPage />} />
+            <Route path='/' element={<HomePage />} /> 
+      </Routes>
+      </div>
+      
     </div>
   );
 }

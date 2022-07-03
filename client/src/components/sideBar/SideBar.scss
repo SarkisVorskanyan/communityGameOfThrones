@@ -1,0 +1,23 @@
+@import '../../styles/Variables.scss';
+
+.sideBar_container{
+    position: fixed;
+    width: 30%;
+    height: 100vh;
+    background: $mainColor;
+    transform: translateX(-80%);
+    transition: all 0.9s;
+}
+
+.sideBar_container_active{
+    transition: all 0.9s;
+    transform: translateX(0);
+    width: 30%;
+    position: fixed;
+    height: 100vh;
+    background: $mainColor;
+}
+
+// .sidebar_subContainer{
+
+// }
