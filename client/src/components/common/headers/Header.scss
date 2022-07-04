@@ -1,8 +1,29 @@
 @import '../../../styles/Variables.scss';
+@import '../../../styles/@mixin.scss';
 
 .header_container{
     background-color: $mainColor;
-    width: 100%;
     padding: 20px 40px;
     border: 1px solid;
-}
+    @include spaceBetweemContainer();
+    div{
+        .auth_btn{
+            height: 100%;
+            width: 70px;
+            cursor: pointer;
+            @include centerContainer();
+            position: relative;
+            &:hover{
+                .auth_list{
+                    display: block;
+                }
+            }
+            .auth_list{
+                display: none;
+                position: absolute;
+                top: 25px;
+                right: -17px;
+            }
+        }
+    }
+}    
