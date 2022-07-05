@@ -1,14 +1,14 @@
 //blocks
-export const MainColor = '#19222A'
+export const MainColor: string = '#19222A'
 
 //lists
-export const listDefaultLightColor = '#59646d'
-export const listHoverLightColor = '#8d98a1'
+export const listDefaultLightColor: string = '#59646d'
+export const listHoverLightColor: string = '#8d98a1'
 
 //texts
-export const LightFontColor = '#fffafa'
-export const listLightTextColor = 'aliceblue'
-export const listTextColor = '#000015'
-
+export const LightFontColor: string = '#fffafa'
+export const listLightTextColor: string = 'aliceblue'
+export const listTextColor: string = '#000015'
+export const logoColor: string = '#c4c3c2'
 
 

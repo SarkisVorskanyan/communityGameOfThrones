@@ -3,16 +3,24 @@
 
 .header_container{
     background-color: $mainColor;
-    padding: 20px 40px;
     border: 1px solid;
     @include spaceBetweemContainer();
-    div{
+    .leftSide_header{
+        padding: 20px 40px;
+        display: flex;
+        align-items: center;
+        a{
+            @include logoTitle();
+        }
+    }
+    .rightSide_header{
         .auth_btn{
             height: 100%;
             width: 70px;
             cursor: pointer;
             @include centerContainer();
             position: relative;
+            padding: 20px 8px;
             &:hover{
                 .auth_list{
                     display: block;
@@ -21,9 +29,24 @@
             .auth_list{
                 display: none;
                 position: absolute;
-                top: 25px;
-                right: -17px;
+                top: 43px;
+                right: -1px;
             }
         }
     }
 }    
+
+// span.ripple {
+//     position: absolute;
+//     border-radius: 20%;
+//     transform: scale(0);
+//     animation: ripple 600ms linear;
+//     background-color: rgba(255, 255, 255, 0.7);
+//   }
+  
+//   @keyframes ripple {
+//     to {
+//       transform: scale(1.5);
+//       opacity: 0;
+//     }
+//   }

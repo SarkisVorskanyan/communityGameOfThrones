@@ -19,21 +19,21 @@ ul{
 }
 
 li{
-    background-color: $listDefaultLightColor;
+    background-color: $listHoverLightColor;
     padding: 10px 5px;
     text-align: center;
     font-weight: 600;
-    color: $listLightTextColor;
+    color: $listTextColor;
     a{
       font-weight: 600;
       text-decoration: none;
-      color: $listLightTextColor;
+      color: $listTextColor;
     }
     &:hover{
-      background-color: $listHoverLightColor;
-      color: $listTextColor;
+      background-color: $listDefaultLightColor;
+      color: $listLightTextColor;
       a{
-        color: $listTextColor;
+        color: $listLightTextColor;
       }
     }
 }

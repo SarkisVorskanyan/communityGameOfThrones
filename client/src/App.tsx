@@ -13,6 +13,7 @@ function App() {
   const [showSideBar, setShowSideBar] = useState<boolean>(true)
   const location = useLocation()
   
+
   useEffect(() => {
     if(location.pathname === '/signIn' || location.pathname === '/signUp'){
       setShowSideBar(false)

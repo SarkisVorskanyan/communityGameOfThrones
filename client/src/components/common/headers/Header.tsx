@@ -11,10 +11,11 @@ interface HeaderProps{
 const Header: FC <HeaderProps> = ({showSideBar}) => {
     return (
         <div className='header_container'>
-            <div>
+            <div className='leftSide_header'>
                 {showSideBar && <BurgerBtn />}
+                <NavLink to="/">Game of Thrones Community</NavLink>
             </div>
-            <div>
+            <div className='rightSide_header'>
                 <div className='auth_btn'>
                     <BiCaretDown size='3rem' />
                     <div className='auth_list'>
