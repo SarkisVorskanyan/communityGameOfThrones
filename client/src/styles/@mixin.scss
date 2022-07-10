@@ -25,6 +25,14 @@
     align-items: center;
 }
 
+//forms
+
+@mixin formContainer {
+    border: 2px solid #000;
+    padding: 2% 45px;
+    border-radius: 20px;
+}
+
 //custom
 
 @mixin logoTitle {
@@ -33,4 +41,11 @@
     font-size: 3rem;
     color: $logoColor;
     padding-left: 40px;
+}
+
+//texts
+
+@mixin formError(){
+    margin: 0;
+    color: $form_error;
 }
