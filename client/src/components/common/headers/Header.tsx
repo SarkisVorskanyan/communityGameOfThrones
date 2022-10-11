@@ -4,12 +4,14 @@ import './Header.scss'
 import { BiCaretDown } from "react-icons/bi";
 import { NavLink } from 'react-router-dom';
 import { createRipple } from './../../../helpers/styleEffects/RipplyEffect';
+import {useAppSelector} from "../../../store/StoreHooks";
 
 interface HeaderProps{
     showSideBar: boolean
 }
 
 const Header: FC <HeaderProps> = ({showSideBar}) => {
+    const {auth} = useAppSelector(state => state.auth)
     return (
         <div className='header_container'>
             <div className='leftSide_header'>
@@ -18,7 +20,7 @@ const Header: FC <HeaderProps> = ({showSideBar}) => {
             </div>
             <div className='rightSide_header'>
                 <div className='auth_btn'>
-                    <BiCaretDown size='3rem' />
+                    <BiCaretDown size='2rem' />
                     <div className='auth_list'>
                         <ul>
                             <li>
@@ -27,7 +29,7 @@ const Header: FC <HeaderProps> = ({showSideBar}) => {
                             <li>
                                 <NavLink to="/signUp">Регистрация</NavLink>
                             </li>
-                            <li>Выход</li>
+                            {auth ? <li>Выход</li> : null}
                         </ul>
                     </div>
                 </div>

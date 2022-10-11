@@ -1,5 +1,6 @@
 export interface UserType{
     email: string,
     id: string,
-    nickname: string
+    nickname: string,
+    isActivated: true
 }

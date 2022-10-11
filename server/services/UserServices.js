@@ -8,13 +8,13 @@ class UserServices {
     async checkAuth(email, nickname) {
         const candidate = await UserModel.findOne({email})
         if(candidate){
-            let error = getMessage(email, 'email')
+            let error = getMessage('error-email', email)
             throw ApiError.badRequest(error)
         }
         
         const name = await UserModel.findOne({nickname})
         if(name){
-            let error = getMessage(nickname, 'nickname')
+            let error = getMessage('error-nickname', nickname)
             throw ApiError.badRequest(error)
         }
         return true

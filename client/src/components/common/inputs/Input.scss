@@ -2,10 +2,7 @@
 
 .customInput_container{ 
   position:relative; 
-  margin-bottom:45px; 
-  p{
-    @include formError()
-  }
+  margin-bottom: 45px;
   input{
   font-size: 18px;
   padding: 10px 10px 10px 5px;

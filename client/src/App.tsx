@@ -7,6 +7,7 @@ import HomePage from './pages/homePage/HomePage';
 import Header from './components/common/headers/Header';
 import SideBar from './components/sideBar/SideBar';
 import { useAppSelector } from './store/StoreHooks';
+import Toaster from "./components/common/toaster/Toaster";
 
 function App() {
   const {toggleSideBar} = useAppSelector(state => state.settings)
@@ -24,6 +25,7 @@ function App() {
 
   return (
     <div className="App">
+      <Toaster />
       <Header showSideBar={showSideBar} />
       {showSideBar && <SideBar />}
       <div style={{padding: !showSideBar ? '40px 8%' : toggleSideBar ? '40px 8% 40px 34%' : '40px 8%'}}>

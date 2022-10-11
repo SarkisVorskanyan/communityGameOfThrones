@@ -2,23 +2,35 @@ import React, { FC, useState } from 'react'
 import CustomInput from '../../../components/common/inputs/CustomInput'
 import FormTitle from '../../../components/common/titles/FormTitle'
 import './SignUpPage.scss'
-import {Formik} from 'formik';
+import {ErrorMessage, Formik} from 'formik';
 import { ReqSignUpType } from '../../../types/authType/ReqSIgnUpType'
 import { SignUpValidate } from './../../../utils/validation/SignUpValidate';
 import SubmitBtn from '../../../components/common/buttons/submitBtn/SubmitBtn';
+import Spinner from '../../../components/common/loading/spinner/Spinner';
+import {useAppDispatch, useAppSelector} from "../../../store/StoreHooks";
+import {registration} from "../../../store/features/authReducer/Auth_api";
 
 const SignUpPage: FC = () => {
-    const initialValues: ReqSignUpType = { email: '', password: '', nickname: '' };
-   
+    const {load} = useAppSelector(state => state.auth)
+    const initialValues: ReqSignUpType = { email: '', password: '', nickname: '', confirmPassword: "" };
+    const dispatch = useAppDispatch()
+
+    const SignUp = (values: ReqSignUpType) => {
+        dispatch(registration(values))
+    }
+
+
     return (
       <div className='signUp_container'>
+          {load ? <Spinner /> : null}
         <div className='signUp_subContainer'>
         <FormTitle title='Регистрация' />
           <Formik
             initialValues={initialValues}
             validationSchema={SignUpValidate}
             onSubmit={ (values, action) => {
-                console.log(values)
+                console.log(values, ' values')
+                SignUp(values)
                 action.resetForm()
             }}
           >
@@ -28,29 +40,55 @@ const SignUpPage: FC = () => {
               touched,
               handleChange,
               handleSubmit,
+              handleBlur,
               setFieldValue
             }) => (
                     <form onSubmit={handleSubmit}>
-                      <CustomInput
-                          handleChange={handleChange}
-                          name={'email'}
-                          value={values.email}
-                          error={errors.email}
-                          label={'Email'} />
-                      <CustomInput 
-                          handleChange={handleChange}
-                          error={errors.password}
-                          value={values.password}
-                          name={'password'}
-                          label={'Парол'} />
-                      <CustomInput 
-                          error={errors.nickname}
-                          handleChange={handleChange}
-                          value={values.nickname}
-                          name={'nickname'}
-                          label={'Имя'} />
-                          <SubmitBtn />
-                      {/* <button type='submit' onClick={(e) => handleSubmit()}>send</button> */}
+                      <CustomInput handleChange={handleChange}
+                                   name={'email'}
+                                   touched={touched.email}
+                                   value={values.email}
+                                   error={errors.email}
+                                   label={'Email'}>
+                          <ErrorMessage name={'email'}>
+                              {(errorMsg => <p className={'errorText'}>{errorMsg}</p>)}
+                          </ErrorMessage>
+                      </CustomInput>
+
+                      <CustomInput handleChange={handleChange}
+                                   error={errors.password}
+                                   value={values.password}
+                                   touched={touched.password}
+                                   type={'password'}
+                                   name={'password'}
+                                   label={'Парол'} >
+                        <ErrorMessage name={'password'}>
+                              {(errorMsg => <p className={'errorText'}>{errorMsg}</p>)}
+                          </ErrorMessage>
+                      </CustomInput>
+                      <CustomInput handleChange={handleChange}
+                                     error={errors.confirmPassword}
+                                     value={values.confirmPassword}
+                                     touched={touched.confirmPassword}
+                                     type={'password'}
+                                     name={'confirmPassword'}
+                                     label={'Пофторите парол'} >
+                            <ErrorMessage name={'confirmPassword'}>
+                                {(errorMsg => <p className={'errorText'}>{errorMsg}</p>)}
+                            </ErrorMessage>
+                      </CustomInput>
+
+                      <CustomInput error={errors.nickname}
+                                   handleChange={handleChange}
+                                   value={values.nickname}
+                                   touched={touched.nickname}
+                                   name={'nickname'}
+                                   label={'Имя'}>
+                          <ErrorMessage name={'nickname'}>
+                              {(errorMsg => <p className={'errorText'}>{errorMsg}</p>)}
+                          </ErrorMessage>
+                      </CustomInput>
+                          <SubmitBtn handleSubmit={handleSubmit} label='Регистрация' />
                     </form>
             )}
           </Formik>

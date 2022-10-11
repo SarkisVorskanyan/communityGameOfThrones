@@ -5,7 +5,7 @@ import bcrypt from 'bcrypt'
 import { UserDataToken_dto } from '../dto/UserDataToken_dto.js';
 import { validationResult } from "express-validator";
 import { User_dto } from './../dto/User_dto.js';
-import { VALIDATION_ERROR } from './../configs/Messages.js';
+import {getMessage, VALIDATION_ERROR} from './../configs/Messages.js';
 import logger from '../logger/Logger.js';
 import * as uuid from 'uuid';
 import MailServices from '../services/MailServices.js';
@@ -25,17 +25,14 @@ class AuthController {
             const userRole = await RoleModal.findOne({value: 'user'})
             const User = await UserModel.create({email, password: hashPassword, nickname, activationLink, role: [userRole.value]})
             await MailServices.sendActivationMail(email, `${process.env.API_WEB_URL}/api/auth/activate/${activationLink}`)
-            const user = new User_dto(User)
-            const UserDataToken = new UserDataToken_dto(User)
-            const tokens = TokenServices.generateTokens({...UserDataToken})
-            await TokenServices.saveToken(UserDataToken.id, tokens.refreshToken)
-            res.cookie('refreshToken', tokens.refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true})
-            res.json({
-                ...tokens,
-                user
-            })
+            //const user = new User_dto(User)
+            //const UserDataToken = new UserDataToken_dto(User)
+            //const tokens = TokenServices.generateTokens({...UserDataToken})
+            //await TokenServices.saveToken(UserDataToken.id, tokens.refreshToken)
+            //res.cookie('refreshToken', tokens.refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true})
+            res.json({message: getMessage('success-signUp')})
         }catch(e){
-            console.log(e);
+            next(e)
         }
     }
 
