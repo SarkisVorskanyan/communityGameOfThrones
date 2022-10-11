@@ -8,12 +8,14 @@ export const AUTORIZED_ERROR = 'Нет аутентификации'
 export const ADMIN_ERROR = 'Ты не являешся админом'
 export const INCORRECT_LINK = 'Это не правилнйй адресс'
 
-export function getMessage (value, type){
+export function getMessage (type, value = ''){
     switch (type) {
-        case 'email':
+        case 'error-email':
             return `Ваш ${value} email уже исползуется, попробуйте другой email`
-        case 'nickname':
+        case 'error-nickname':
             return `${value}, это имя уже исползуется, попробуйте другое имя`
+        case 'success-signUp':
+            return `Вы успешно зарегистрировани, проверте ваша электронная почта`
         default:
             break;
     }

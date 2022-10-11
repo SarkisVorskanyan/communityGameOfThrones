@@ -38,9 +38,15 @@
 @mixin logoTitle {
     text-decoration: none;
     font-family: cursive;
-    font-size: 3rem;
+    font-size: 2rem;
     color: $logoColor;
     padding-left: 40px;
+    @media only screen and (max-width: 800px) {
+        font-size: 25px;
+    }
+    @media only screen and (max-width: 600px) {
+        font-size: 20px;
+    }
 }
 
 //texts

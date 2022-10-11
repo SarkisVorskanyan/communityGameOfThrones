@@ -2,7 +2,7 @@ import React, { FC, useState } from 'react'
 import { useAppSelector } from '../../../../store/StoreHooks'
 import './BurgerBtn.scss'
 import { useAppDispatch } from './../../../../store/StoreHooks';
-import { setTogleSideBar } from '../../../../store/reducers/Settings_reducer';
+import { setTogleSideBar } from '../../../../store/features/settingsReducer/Settings_reducer';
 
 const BurgerBtn: FC = () => {
     

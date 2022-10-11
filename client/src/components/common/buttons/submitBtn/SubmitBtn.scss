@@ -6,24 +6,35 @@
     margin-right: auto;
     overflow: hidden;
     transition: 0.5s;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    background-color: #ff4e00;
+    background-image: linear-gradient(315deg, #ff4e00 0%, #ec9f05 74%);
+    border: 1px solid #abe9cd;
+    box-shadow: 5px 10px 8px #888888;
+    &:active{
+      box-shadow: none;
+    }
     button {
         width: 100%;
         height: 100%;
-        font-family: "Monument Extended", sans-serif;
+        font-family: cursive;
         font-size: 40px;
-        background-color: #ff4e00;
-        background-image: linear-gradient(315deg, #ff4e00 0%, #ec9f05 74%);
+        background-color: #abe9cd;
+        background-image: linear-gradient(315deg, #abe9cd 0%, #3eadcf 74%);
         -webkit-mask: url("https://raw.githubusercontent.com/robin-dela/css-mask-animation/master/img/nature-sprite.png");
         mask: url("https://raw.githubusercontent.com/robin-dela/css-mask-animation/master/img/nature-sprite.png");
         -webkit-mask-size: 2300% 100%;
         mask-size: 2300% 100%;
-        border: 1px solid green;
+        border: 1px solid #abe9cd;
         color: #000;
         cursor: pointer;
         animation: anim2 0.7s steps(22) forwards;
+        box-shadow: 5px 10px 8px #888888;
         &:hover{
             animation: anim1 0.7s steps(22) forwards;
+            
+        }
+        &:active{
+          color: aliceblue;
         }
       }
       .mask {
@@ -31,10 +42,10 @@
         color: rgb(5, 5, 95);
         text-align: center;
         width: 101%;
-        font-family: "Monument Extended", sans-serif;
+        font-family: cursive;
         font-weight: lighter;
         font-size: 40px;
-        margin-top: 25px;
+        //margin-top: 25px;
         overflow: hidden;
       }
       
