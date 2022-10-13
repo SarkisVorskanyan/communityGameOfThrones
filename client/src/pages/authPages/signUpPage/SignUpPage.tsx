@@ -44,50 +44,56 @@ const SignUpPage: FC = () => {
               setFieldValue
             }) => (
                     <form onSubmit={handleSubmit}>
-                      <CustomInput handleChange={handleChange}
-                                   name={'email'}
-                                   touched={touched.email}
-                                   value={values.email}
-                                   error={errors.email}
-                                   label={'Email'}>
-                          <ErrorMessage name={'email'}>
-                              {(errorMsg => <p className={'errorText'}>{errorMsg}</p>)}
-                          </ErrorMessage>
-                      </CustomInput>
+                        <div className={'formBlock'}>
+                            <div className={'formSubBlock'}>
+                                <CustomInput handleChange={handleChange}
+                                             name={'email'}
+                                             touched={touched.email}
+                                             value={values.email}
+                                             error={errors.email}
+                                             label={'Email'}>
+                                    <ErrorMessage name={'email'}>
+                                        {(errorMsg => <p className={'errorText'}>{errorMsg}</p>)}
+                                    </ErrorMessage>
+                                </CustomInput>
 
-                      <CustomInput handleChange={handleChange}
-                                   error={errors.password}
-                                   value={values.password}
-                                   touched={touched.password}
-                                   type={'password'}
-                                   name={'password'}
-                                   label={'Парол'} >
-                        <ErrorMessage name={'password'}>
-                              {(errorMsg => <p className={'errorText'}>{errorMsg}</p>)}
-                          </ErrorMessage>
-                      </CustomInput>
-                      <CustomInput handleChange={handleChange}
-                                     error={errors.confirmPassword}
-                                     value={values.confirmPassword}
-                                     touched={touched.confirmPassword}
-                                     type={'password'}
-                                     name={'confirmPassword'}
-                                     label={'Пофторите парол'} >
-                            <ErrorMessage name={'confirmPassword'}>
-                                {(errorMsg => <p className={'errorText'}>{errorMsg}</p>)}
-                            </ErrorMessage>
-                      </CustomInput>
+                                <CustomInput handleChange={handleChange}
+                                             error={errors.password}
+                                             value={values.password}
+                                             touched={touched.password}
+                                             type={'password'}
+                                             name={'password'}
+                                             label={'Парол'} >
+                                    <ErrorMessage name={'password'}>
+                                        {(errorMsg => <p className={'errorText'}>{errorMsg}</p>)}
+                                    </ErrorMessage>
+                                </CustomInput>
+                            </div>
+                            <div className={'formSubBlock'}>
+                                <CustomInput handleChange={handleChange}
+                                             error={errors.confirmPassword}
+                                             value={values.confirmPassword}
+                                             touched={touched.confirmPassword}
+                                             type={'password'}
+                                             name={'confirmPassword'}
+                                             label={'Пофторите парол'} >
+                                    <ErrorMessage name={'confirmPassword'}>
+                                        {(errorMsg => <p className={'errorText'}>{errorMsg}</p>)}
+                                    </ErrorMessage>
+                                </CustomInput>
 
-                      <CustomInput error={errors.nickname}
-                                   handleChange={handleChange}
-                                   value={values.nickname}
-                                   touched={touched.nickname}
-                                   name={'nickname'}
-                                   label={'Имя'}>
-                          <ErrorMessage name={'nickname'}>
-                              {(errorMsg => <p className={'errorText'}>{errorMsg}</p>)}
-                          </ErrorMessage>
-                      </CustomInput>
+                                <CustomInput error={errors.nickname}
+                                             handleChange={handleChange}
+                                             value={values.nickname}
+                                             touched={touched.nickname}
+                                             name={'nickname'}
+                                             label={'Имя'}>
+                                    <ErrorMessage name={'nickname'}>
+                                        {(errorMsg => <p className={'errorText'}>{errorMsg}</p>)}
+                                    </ErrorMessage>
+                                </CustomInput>
+                            </div>
+                        </div>
                           <SubmitBtn handleSubmit={handleSubmit} label='Регистрация' />
                     </form>
             )}
