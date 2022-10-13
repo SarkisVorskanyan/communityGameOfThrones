@@ -11,7 +11,7 @@ interface HeaderProps{
 }
 
 const Header: FC <HeaderProps> = ({showSideBar}) => {
-    const {auth} = useAppSelector(state => state.auth)
+    const {isAuth} = useAppSelector(state => state.auth)
     return (
         <div className='header_container'>
             <div className='leftSide_header'>
@@ -21,17 +21,19 @@ const Header: FC <HeaderProps> = ({showSideBar}) => {
             <div className='rightSide_header'>
                 <div className='auth_btn'>
                     <BiCaretDown size='2rem' />
-                    <div className='auth_list'>
-                        <ul>
-                            <li>
+                    {/*<div className='auth_list'>*/}
+                        <ul className='auth_list'>
+                            {!isAuth ? <li>
                                 <NavLink to="/signIn">Войти</NavLink>
-                            </li>
-                            <li>
+                            </li> : null}
+                            {!isAuth ? <li>
                                 <NavLink to="/signUp">Регистрация</NavLink>
-                            </li>
-                            {auth ? <li>Выход</li> : null}
+                            </li> : null}
+                            {isAuth ? <li>
+                                <NavLink to="/#">Выход</NavLink>
+                                </li> : null}
                         </ul>
-                    </div>
+                    {/*</div>*/}
                 </div>
             </div>
             
