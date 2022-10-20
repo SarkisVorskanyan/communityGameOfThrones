@@ -5,17 +5,22 @@ import router from './router/index.js';
 import cors from 'cors'
 import cookieParser from 'cookie-parser';
 import corsMiddleware from './middleware/CorsMiddleware.js'
+import session from "express-session";
 
 
 const PORT = process.env.PORT || 8000
 const DB_URL = process.env.DB_URL
 const app = express()
 
+
+app.use(
+    cors({
+        origin: ['http://localhost:3000'],
+        credentials: true,
+    })
+);
 app.use(express.json())
-app.use(cors())
 app.use(cookieParser())
-//app.use(cors())
-//app.use(corsMiddleware)
 app.use('/api', router)
 app.use(ErrorHandlingMiddleware)
 

@@ -3,6 +3,8 @@ import ApiError from './../error/ApiError.js';
 import bcrypt from 'bcrypt'
 import { EMAIL_INCORRECT, getMessage, INCORRECT_LINK, PASSWORD_INCORRECT } from './../configs/Messages.js';
 import TokenServices from "./TokenServices.js";
+import {User_dto} from "../dto/User_dto.js";
+import tokenServices from "./TokenServices.js";
 
 class UserServices {
     async checkAuth(email, nickname) {
@@ -37,10 +39,15 @@ class UserServices {
             throw ApiError.UnauthorizedError()
         }
         const userData = TokenServices.validateToken(refreshToken, process.env.JWT_REFRESH_TOKEN)
-        const tokenFromDB = TokenServices.findToken(refreshToken)
+        const tokenFromDB = await TokenServices.findToken(refreshToken)
         if(!userData || !tokenFromDB){
             throw ApiError.UnauthorizedError()
         }
+        const user = await UserModel.findById(userData.id);
+        const userDto = new User_dto(user);
+        const tokens = tokenServices.generateTokens({...userDto});
+        await tokenServices.saveToken(userDto.id, tokens.refreshToken);
+        return {...tokens, user: userDto}
     }
 
     async activate(activationLink){

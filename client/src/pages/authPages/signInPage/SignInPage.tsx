@@ -26,7 +26,6 @@ const SignInPage: FC = () => {
                     initialValues={initialValues}
                     validationSchema={SignInValidate}
                     onSubmit={ (values, action) => {
-                        console.log(values, ' values')
                         dispatch(login(values))
                         action.resetForm()
                     }}

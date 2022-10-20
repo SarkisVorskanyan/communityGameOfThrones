@@ -10,6 +10,7 @@ import logger from '../logger/Logger.js';
 import * as uuid from 'uuid';
 import MailServices from '../services/MailServices.js';
 import RoleModal from '../database/models/RoleModal.js';
+import Logger from "../logger/Logger.js";
 
 class AuthController {
     async registration(req, res, next){
@@ -23,13 +24,14 @@ class AuthController {
             const hashPassword = await bcrypt.hash(password, 3)
             const activationLink = uuid.v4()
             const userRole = await RoleModal.findOne({value: 'user'})
-            const User = await UserModel.create({email, password: hashPassword, nickname, activationLink, role: [userRole.value]})
+            await UserModel.create({email, password: hashPassword, nickname, activationLink, role: [userRole.value]})
             await MailServices.sendActivationMail(email, `${process.env.API_WEB_URL}/api/auth/activate/${activationLink}`)
             //const user = new User_dto(User)
-            //const UserDataToken = new UserDataToken_dto(User)
-            //const tokens = TokenServices.generateTokens({...UserDataToken})
-            //await TokenServices.saveToken(UserDataToken.id, tokens.refreshToken)
-            //res.cookie('refreshToken', tokens.refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true})
+            // const UserDataToken = new UserDataToken_dto(User)
+            // const tokens = TokenServices.generateTokens({...UserDataToken})
+            // await TokenServices.saveToken(UserDataToken.id, tokens.refreshToken)
+            // res.cookie('refreshToken', tokens.refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true})
+            Logger.info(`User ${nickname} sign up`, { message: 'world' });
             res.json({message: getMessage('success-signUp')})
         }catch(e){
             next(e)
@@ -44,6 +46,7 @@ class AuthController {
             const UserDataToken = new UserDataToken_dto(user)
             const tokens = TokenServices.generateTokens({...UserDataToken})
             await TokenServices.saveToken(UserDataToken.id, tokens.refreshToken)
+            res.cookie('refreshToken', tokens.refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true})
             res.json({
                 ...tokens,
                 User
@@ -68,7 +71,7 @@ class AuthController {
         try {
             const {refreshToken} = req.cookies
             const userData = await UserServices.refresh(refreshToken)
-            
+
             res.cookie('refreshToken', userData.refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true})
             return res.json(userData)
         } catch (error) {
@@ -88,7 +91,6 @@ class AuthController {
 
     async getUsers(req, res, next){
         try{
-            console.log(req.headers.authorization)
             const users = await UserModel.find()
             return res.json(users)
         }catch (e) {

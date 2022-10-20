@@ -1,6 +1,6 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import { UserType } from '../../../types/authType/UserType';
-import {login, registration} from "./Auth_api";
+import {login, logOut, refresh, registration} from "./Auth_api";
 import {SignInType} from "../../../types/authType/SignInType";
 import storageService from "../../../utils/storageService/StorageService";
 import { ToastContainer, toast } from 'react-toastify';
@@ -65,6 +65,34 @@ export const AuthSlice = createSlice({
             state.load = false
             state.error = action.payload.response.data.message
             toast.error(action.payload.response.data.message)
+        },
+
+        [refresh.pending.type]: (state) => {
+            state.load = true
+        },
+        [refresh.fulfilled.type]: (state, action: PayloadAction<SignInType>) => {
+            state.load = false
+            state.userInfo = action.payload.user
+            storageService.setToken(action.payload.accessToken)
+            state.isAuth = true
+            state.error = ''
+        },
+        [refresh.rejected.type]: (state, action: PayloadAction<any>) => {
+            state.load = false
+        },
+
+        [logOut.pending.type]: (state) => {
+            state.load = true
+        },
+        [logOut.fulfilled.type]: (state, action: PayloadAction<any>) => {
+            state.load = false
+            state.userInfo = {}
+            localStorage.removeItem('token')
+            state.isAuth = false
+            state.error = ''
+        },
+        [logOut.rejected.type]: (state, action: PayloadAction<any>) => {
+            state.load = false
         },
     }
 })

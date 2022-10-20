@@ -13,14 +13,13 @@ export const AuthMiddleware = (req, res, next) => {
             }
             const userData = TokenServices.validateToken(token, process.env.JWT_ACCESS_TOKEN)
             if(!userData){
-                // console.log(userData, 'authorizationHeader');
                  return next(ApiError.UnauthorizedError())
              }
              req.user = userData
             next()
         }
         catch (e) {
-            console.log(e)
+            console.log(e, ' error')
             return next(ApiError.UnauthorizedError())
         }
 }
