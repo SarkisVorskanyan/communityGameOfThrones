@@ -2,9 +2,10 @@ import React, { FC } from 'react'
 import BurgerBtn from '../buttons/burgerBtn/BurgerBtn'
 import './Header.scss'
 import { BiCaretDown } from "react-icons/bi";
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { createRipple } from './../../../helpers/styleEffects/RipplyEffect';
-import {useAppSelector} from "../../../store/StoreHooks";
+import {useAppDispatch, useAppSelector} from "../../../store/StoreHooks";
+import {logOut, refresh} from "../../../store/features/authReducer/Auth_api";
 
 interface HeaderProps{
     showSideBar: boolean
@@ -12,6 +13,13 @@ interface HeaderProps{
 
 const Header: FC <HeaderProps> = ({showSideBar}) => {
     const {isAuth} = useAppSelector(state => state.auth)
+    const dispatch = useAppDispatch()
+    const navigate = useNavigate();
+
+    const logout = () => {
+        dispatch(logOut())
+    }
+
     return (
         <div className='header_container'>
             <div className='leftSide_header'>
@@ -23,14 +31,14 @@ const Header: FC <HeaderProps> = ({showSideBar}) => {
                     <BiCaretDown size='2rem' />
                     {/*<div className='auth_list'>*/}
                         <ul className='auth_list'>
-                            {!isAuth ? <li>
-                                <NavLink to="/signIn">Войти</NavLink>
+                            {!isAuth ? <li onClick={() => navigate('/signIn')}>
+                                <a>Войти</a>
                             </li> : null}
-                            {!isAuth ? <li>
-                                <NavLink to="/signUp">Регистрация</NavLink>
+                            {!isAuth ? <li onClick={() => navigate('/signUp')}>
+                                <a >Регистрация</a>
                             </li> : null}
-                            {isAuth ? <li>
-                                <NavLink to="/#">Выход</NavLink>
+                            {isAuth ? <li onClick={logout}>
+                                <a >Выход</a>
                                 </li> : null}
                         </ul>
                     {/*</div>*/}

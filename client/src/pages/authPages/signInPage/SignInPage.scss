@@ -9,13 +9,5 @@
   .errorText{
     @include formError()
   };
-  .formBlock{
-    display: flex;
-    flex-direction: row;
-    .formSubBlock{
-      padding-left: 10px;
-      padding-right: 10px;
-    }
-  }
 }
 

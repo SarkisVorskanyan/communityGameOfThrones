@@ -10,15 +10,12 @@ export const RoleMiddleware = (roles) => {
 
         try{
             const token = req.headers.authorization.split(' ')[1]
-            console.log(token, 'token')
             if(!token){
                 return next(ApiError.UnauthorizedError())
             }
             const {role: userRole} = TokenServices.validateToken(token, process.env.JWT_ACCESS_TOKEN)
-            console.log(userRole, ' userRole')
             let hasRole = false
             userRole.forEach(role => {
-                console.log(role, ' role')
                 if(roles.includes(role)){
                     hasRole = true
                 }

@@ -6,15 +6,17 @@ import SignInPage from './pages/authPages/signInPage/SignInPage';
 import HomePage from './pages/homePage/HomePage';
 import Header from './components/common/headers/Header';
 import SideBar from './components/sideBar/SideBar';
-import { useAppSelector } from './store/StoreHooks';
+import {useAppDispatch, useAppSelector} from './store/StoreHooks';
 import Toaster from "./components/common/toaster/Toaster";
+import { refresh } from './store/features/authReducer/Auth_api';
 
 function App() {
   const {toggleSideBar} = useAppSelector(state => state.settings)
   const {isAuth} = useAppSelector(state => state.auth)
   const [showSideBar, setShowSideBar] = useState<boolean>(true)
   const location = useLocation()
-  
+  const dispatch = useAppDispatch()
+
 
   useEffect(() => {
     if(location.pathname === '/signIn' || location.pathname === '/signUp'){
@@ -23,6 +25,16 @@ function App() {
       setShowSideBar(true)
     }
   }, [location])
+
+    useEffect(() => {
+        dispatch(refresh())
+    }, [])
+
+    useEffect(() => {
+        console.log('render')
+    }, [])
+
+
 
   return (
     <div className="App">

@@ -29,7 +29,6 @@ const SignUpPage: FC = () => {
             initialValues={initialValues}
             validationSchema={SignUpValidate}
             onSubmit={ (values, action) => {
-                console.log(values, ' values')
                 SignUp(values)
                 action.resetForm()
             }}

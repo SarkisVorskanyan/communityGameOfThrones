@@ -25,7 +25,7 @@ const CustomInput: FC <CustomInputProps> = ({label,
             <input type={type}
                     value={value}
                     name={name}
-                    autoComplete={'off'}
+                    //autoComplete={'off'}
                     onChange={(e) => handleChange(e)}
                     required
                     {...props}
