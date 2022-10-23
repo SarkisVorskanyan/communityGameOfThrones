@@ -9,6 +9,7 @@ export const ADMIN_ERROR = 'Ты не являешся админом'
 export const INCORRECT_LINK = 'Это не правилнйй адресс'
 export const SUCCESS_SIGNUP = 'Вы успешно зарегистрировани, проверте ваша электронная почта'
 export const SUCCESS_SEND_RESET_PASS = 'Для изменение пароля, зайдите вашу электронную почту'
+export const SUCCESS_RESET_PASS = 'Пароль был успешно изменен'
 
 export function getMessage (type, value = ''){
     switch (type) {
