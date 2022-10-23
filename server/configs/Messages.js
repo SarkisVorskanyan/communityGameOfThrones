@@ -7,6 +7,8 @@ export const PASSWORD_INCORRECT = 'Парол не правилый'
 export const AUTORIZED_ERROR = 'Нет аутентификации'
 export const ADMIN_ERROR = 'Ты не являешся админом'
 export const INCORRECT_LINK = 'Это не правилнйй адресс'
+export const SUCCESS_SIGNUP = 'Вы успешно зарегистрировани, проверте ваша электронная почта'
+export const SUCCESS_SEND_RESET_PASS = 'Для изменение пароля, зайдите вашу электронную почту'
 
 export function getMessage (type, value = ''){
     switch (type) {
@@ -14,10 +16,7 @@ export function getMessage (type, value = ''){
             return `Ваш ${value} email уже исползуется, попробуйте другой email`
         case 'error-nickname':
             return `${value}, это имя уже исползуется, попробуйте другое имя`
-        case 'success-signUp':
-            return `Вы успешно зарегистрировани, проверте ваша электронная почта`
         default:
             break;
     }
 }
-
