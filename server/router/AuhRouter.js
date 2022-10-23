@@ -16,6 +16,8 @@ router.post('/login', AuthController.login)
 router.get('/logout', AuthController.logout)
 router.get('/refresh', AuthController.refresh)
 router.get('/activate/:link', AuthController.activate)
+router.post('/forgetPass', AuthController.forgetPass)
+router.post('/resetPass/:token', AuthController.resetPass)
 router.get('/user', AuthMiddleware, AuthController.getUsers)
 
 

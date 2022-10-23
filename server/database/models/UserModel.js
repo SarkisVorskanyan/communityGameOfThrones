@@ -6,6 +6,7 @@ const UserSchema = new mongoose.Schema({
     nickname: {type: String, required: true},
     isActivated: {type: Boolean, default: false},
     activationLink: {type: String},
+    resetPassLink: {type: String, default: ''},
     role: [{type: String, ref: 'role'}]
 })
 

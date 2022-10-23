@@ -9,5 +9,11 @@
   .errorText{
     @include formError()
   };
+  .resetPassText{
+    text-decoration: none;
+    color: $mainColor;
+    font-family: cursive;
+    font-size: 15px;
+  }
 }
 

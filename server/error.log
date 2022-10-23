@@ -1,0 +1,42 @@
+{
+  level: 'error',
+  message: "Cannot read properties of null (reading 'link')",
+  stack: "TypeError: Cannot read properties of null (reading 'link')\n" +
+    '    at resetPass (file:///D:/node/communityGameOfThrones/server/controllers/AuthController.js:138:30)\n' +
+    '    at processTicksAndRejections (node:internal/process/task_queues:96:5)',
+  timestamp: '2022-10-23 21:16:00'
+}
+{
+  level: 'error',
+  message: "Cannot read properties of null (reading 'link')",
+  stack: "TypeError: Cannot read properties of null (reading 'link')\n" +
+    '    at resetPass (file:///D:/node/communityGameOfThrones/server/controllers/AuthController.js:138:30)\n' +
+    '    at processTicksAndRejections (node:internal/process/task_queues:96:5)',
+  timestamp: '2022-10-23 21:16:03'
+}
+{
+  level: 'error',
+  message: "Cannot read properties of null (reading 'link')",
+  stack: "TypeError: Cannot read properties of null (reading 'link')\n" +
+    '    at resetPass (file:///D:/node/communityGameOfThrones/server/controllers/AuthController.js:138:30)\n' +
+    '    at processTicksAndRejections (node:internal/process/task_queues:96:5)',
+  timestamp: '2022-10-23 21:17:00'
+}
+{
+  level: 'error',
+  message: "Cannot read properties of null (reading 'link')",
+  stack: "TypeError: Cannot read properties of null (reading 'link')\n" +
+    '    at resetPass (file:///D:/node/communityGameOfThrones/server/controllers/AuthController.js:138:30)\n' +
+    '    at processTicksAndRejections (node:internal/process/task_queues:96:5)',
+  timestamp: '2022-10-23 22:10:55'
+}
+{
+  status: 404,
+  message: 'Парол не правилый',
+  level: 'error',
+  stack: 'Error: Парол не правилый\n' +
+    '    at Function.badRequest (file:///D:/node/communityGameOfThrones/server/error/ApiError.js:11:16)\n' +
+    '    at UserServices.checkLogin (file:///D:/node/communityGameOfThrones/server/services/UserServices.js:32:28)\n' +
+    '    at async login (file:///D:/node/communityGameOfThrones/server/controllers/AuthController.js:48:26)',
+  timestamp: '2022-10-23 22:11:33'
+}
