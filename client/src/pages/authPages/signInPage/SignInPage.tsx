@@ -62,6 +62,7 @@ const SignInPage: FC = () => {
                                     {(errorMsg => <p className={'errorText'}>{errorMsg}</p>)}
                                 </ErrorMessage>
                             </CustomInput>
+                            <p className={'resetPassText'} >Забыли пароль?</p>
                             <SubmitBtn handleSubmit={handleSubmit} label='Вход' />
                         </form>
                     )}

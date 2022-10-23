@@ -118,6 +118,7 @@ class AuthController {
     async resetPass(req, res, next){
         try{
             const token = req.params.token
+            console.log(req.params, ' req.params')
             const existToken = TokenServices.validateToken(token, process.env.FORGET_PASSWORD_TOKEN)
             if(!existToken){
                 throw ApiError.badRequest(INCORRECT_LINK)
@@ -128,8 +129,12 @@ class AuthController {
                 throw ApiError.badRequest(INCORRECT_LINK)
             }
             if(user.resetPassLink !== token){
+                console.log(user.resetPassLink, ' user.resetPassLink')
+                console.log(token, ' token')
                 throw ApiError.badRequest(INCORRECT_LINK)
             }
+            user.resetPassLink = token
+            await user.save()
             res.redirect(process.env.CLIENT_URL)
         }catch (e) {
             Logger.error(e)
