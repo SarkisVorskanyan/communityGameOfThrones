@@ -7,7 +7,7 @@ import { validationResult } from "express-validator";
 import { User_dto } from './../dto/User_dto.js';
 import {
     EMAIL_INCORRECT,
-    getMessage, INCORRECT_LINK,
+    getMessage, INCORRECT_LINK, SUCCESS_RESET_PASS,
     SUCCESS_SEND_RESET_PASS,
     SUCCESS_SIGNUP,
     VALIDATION_ERROR
@@ -19,6 +19,8 @@ import RoleModal from '../database/models/RoleModal.js';
 import ApiError from "../error/ApiError.js";
 import jwt from "jsonwebtoken";
 import Logger from "../logger/Logger.js";
+import ApiError from "../error/ApiError.js";
+import jwt from "jsonwebtoken";
 
 class AuthController {
     async registration(req, res, next){
@@ -34,7 +36,7 @@ class AuthController {
             const userRole = await RoleModal.findOne({value: 'user'})
             await UserModel.create({email, password: hashPassword, nickname, activationLink, role: [userRole.value]})
             await MailServices.sendActivationMail(email, `${process.env.API_WEB_URL}/api/auth/activate/${activationLink}`)
-            Logger.info(`User ${nickname} sign up`, { message: 'world' });
+            Logger.info(`User ${nickname} sign up`);
             res.json({message: SUCCESS_SIGNUP})
         }catch(e){
             Logger.error(e)
@@ -104,11 +106,15 @@ class AuthController {
             if(!user){
                 throw ApiError.badRequest(EMAIL_INCORRECT)
             }
-            const passToken = jwt.sign({email}, process.env.FORGET_PASSWORD_TOKEN, {expiresIn: '5m'})
-
-            await MailServices.SendResetPassword(email, `${process.env.API_WEB_URL}/api/auth/resetPass/${passToken}`)
+            const link = uuid.v4()
+            const passToken = jwt.sign({email, link}, process.env.FORGET_PASSWORD_TOKEN, {expiresIn: '5m'})
+            await MailServices.SendResetPassword(email, `${process.env.API_WEB_URL}`)
             user.resetPassLink = passToken
-            res.json({message: SUCCESS_SEND_RESET_PASS})
+            user.save()
+            res.json({
+                message: SUCCESS_SEND_RESET_PASS,
+                token: passToken
+            })
         }catch (e) {
             Logger.error(e)
             next(e)
@@ -117,25 +123,26 @@ class AuthController {
 
     async resetPass(req, res, next){
         try{
+            const {password} = req.body
             const token = req.params.token
-            console.log(req.params, ' req.params')
             const existToken = TokenServices.validateToken(token, process.env.FORGET_PASSWORD_TOKEN)
             if(!existToken){
                 throw ApiError.badRequest(INCORRECT_LINK)
             }
-            const {email} = existToken
+            const {email, link} = existToken
             const user = await UserModel.findOne({email})
             if(!user){
                 throw ApiError.badRequest(INCORRECT_LINK)
             }
-            if(user.resetPassLink !== token){
-                console.log(user.resetPassLink, ' user.resetPassLink')
-                console.log(token, ' token')
+            const validateToken = TokenServices.validateToken(user.resetPassLink, process.env.FORGET_PASSWORD_TOKEN)
+            if(validateToken.link !== link){
                 throw ApiError.badRequest(INCORRECT_LINK)
             }
-            user.resetPassLink = token
+            user.resetPassLink = ''
+            const hashPassword = await bcrypt.hash(password, 3)
+            user.password = hashPassword
             await user.save()
-            res.redirect(process.env.CLIENT_URL)
+            res.json({message: SUCCESS_RESET_PASS})
         }catch (e) {
             Logger.error(e)
             next(e)
