@@ -6,14 +6,17 @@ import SignInPage from './pages/authPages/signInPage/SignInPage';
 import HomePage from './pages/homePage/HomePage';
 import Header from './components/common/headers/Header';
 import SideBar from './components/sideBar/SideBar';
-import { useAppSelector } from './store/StoreHooks';
+import {useAppDispatch, useAppSelector} from './store/StoreHooks';
 import Toaster from "./components/common/toaster/Toaster";
+import ResetPassPage from "./pages/authPages/resetPassPage/ResetPassPage";
+import {refresh} from "./store/features/authReducer/Auth_api";
 
 function App() {
   const {toggleSideBar} = useAppSelector(state => state.settings)
   const {isAuth} = useAppSelector(state => state.auth)
   const [showSideBar, setShowSideBar] = useState<boolean>(true)
   const location = useLocation()
+    const dispatch = useAppDispatch()
   
 
   useEffect(() => {
@@ -24,7 +27,12 @@ function App() {
     }
   }, [location])
 
-  return (
+    useEffect(() => {
+        dispatch(refresh())
+    }, [])
+
+
+    return (
     <div className="App">
       <Toaster />
       <Header showSideBar={showSideBar} />
@@ -33,6 +41,7 @@ function App() {
         <Routes>
             <Route path='/signUp' element={isAuth ? <Navigate to='/' /> : <SignUpPage />} />
             <Route path='/signIn' element={isAuth ? <Navigate to='/' /> : <SignInPage />} />
+            <Route path='/resetPass' element={isAuth ? <Navigate to='/' /> : <ResetPassPage />} />
             <Route path='/' element={<HomePage />} />
         </Routes>
       </div>

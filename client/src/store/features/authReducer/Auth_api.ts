@@ -24,8 +24,39 @@ export const registration = createAsyncThunk(
 export const login = createAsyncThunk(
     'auth/login',
     async (data: ReqSignInType, thunkAPI) => {
+
         try{
-            const response = await instance.post<SignInType>('auth/login', data)
+            const response = await instance.post<SignInType>('auth/login', data, {withCredentials: true})
+            return response.data
+        }
+        catch (e) {
+            console.log(e, ' error')
+            return thunkAPI.rejectWithValue(e)
+        }
+    }
+)
+
+export const refresh = createAsyncThunk(
+    'auth/refresh',
+    async (_, thunkAPI) => {
+
+        try{
+            const response = await instance.get('auth/refresh', {withCredentials: true})
+            return response.data
+        }
+        catch (e) {
+            console.log(e, ' error')
+            return thunkAPI.rejectWithValue(e)
+        }
+    }
+)
+
+export const logOut = createAsyncThunk(
+    'auth/logOut',
+    async (_, thunkAPI) => {
+
+        try{
+            const response = await instance.get('auth/logout', {withCredentials: true})
             return response.data
         }
         catch (e) {

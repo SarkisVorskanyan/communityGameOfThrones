@@ -3,3 +3,5 @@
 
 /server/node_modules
 /server/.env
+/server/combined.log
+/server/error.log

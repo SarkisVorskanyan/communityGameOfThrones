@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, {FC, useState} from 'react'
 import Spinner from "../../../components/common/loading/spinner/Spinner";
 import FormTitle from "../../../components/common/titles/FormTitle";
 import {ErrorMessage, Formik} from "formik";
@@ -11,10 +11,12 @@ import {ReqSignInType} from "../../../types/authType/ReqSignInType";
 import {SignInValidate} from "../../../utils/validation/SignInValidate";
 import { login } from '../../../store/features/authReducer/Auth_api';
 import './SignInPage.scss'
+import {NavLink} from "react-router-dom";
 
 const SignInPage: FC = () => {
     const {load} = useAppSelector(state => state.auth)
     const initialValues: ReqSignInType = { email: '', password: ''};
+    const [showResetPass, setShowResetPass] = useState<boolean>(false)
     const dispatch = useAppDispatch()
 
     return (
@@ -41,29 +43,39 @@ const SignInPage: FC = () => {
                           setFieldValue
                       }) => (
                         <form onSubmit={handleSubmit}>
-                            <CustomInput handleChange={handleChange}
-                                         name={'email'}
-                                         touched={touched.email}
-                                         value={values.email}
-                                         error={errors.email}
-                                         label={'Email'}>
-                                <ErrorMessage name={'email'}>
-                                    {(errorMsg => <p className={'errorText'}>{errorMsg}</p>)}
-                                </ErrorMessage>
-                            </CustomInput>
+                            {!showResetPass ? (
+                                <div>
+                                    <CustomInput handleChange={handleChange}
+                                                 name={'email'}
+                                                 touched={touched.email}
+                                                 value={values.email}
+                                                 error={errors.email}
+                                                 label={'Email'}>
+                                        <ErrorMessage name={'email'}>
+                                            {(errorMsg => <p className={'errorText'}>{errorMsg}</p>)}
+                                        </ErrorMessage>
+                                    </CustomInput>
 
-                            <CustomInput handleChange={handleChange}
-                                         error={errors.password}
-                                         value={values.password}
-                                         touched={touched.password}
-                                         type={'password'}
-                                         name={'password'}
-                                         label={'Парол'} >
-                                <ErrorMessage name={'password'}>
-                                    {(errorMsg => <p className={'errorText'}>{errorMsg}</p>)}
-                                </ErrorMessage>
-                            </CustomInput>
-                            <SubmitBtn handleSubmit={handleSubmit} label='Вход' />
+                                    <CustomInput handleChange={handleChange}
+                                                 error={errors.password}
+                                                 value={values.password}
+                                                 touched={touched.password}
+                                                 type={'password'}
+                                                 name={'password'}
+                                                 label={'Парол'} >
+                                        <ErrorMessage name={'password'}>
+                                            {(errorMsg => <p className={'errorText'}>{errorMsg}</p>)}
+                                        </ErrorMessage>
+                                    </CustomInput>
+                                    <p className={'resetPassText'} >Забыли пароль?</p>
+                                    <div style={{marginTop: 20}}>
+                                        <SubmitBtn handleSubmit={handleSubmit} label='Вход' />
+                                    </div>
+                                </div>
+                            ) : (
+                                <SubmitBtn handleSubmit={handleSubmit} label='Send email' />
+                            )}
+
                         </form>
                     )}
                 </Formik>

@@ -4,7 +4,7 @@ const logger = createLogger({
   level: "info", //Sets the default level
   format: combine(
       errors({ stack: true }),
-      timestamp(),
+      timestamp({format: 'YYYY-MM-DD HH:mm:ss'}),
       prettyPrint(),
       splat()
   ),
