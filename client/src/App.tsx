@@ -9,6 +9,9 @@ import SideBar from './components/sideBar/SideBar';
 import {useAppDispatch, useAppSelector} from './store/StoreHooks';
 import Toaster from "./components/common/toaster/Toaster";
 import { refresh } from './store/features/authReducer/Auth_api';
+import ForgetPassPage from "./pages/authPages/forgetPassPage/ForgetPassPage";
+import storageService from "./utils/storageService/StorageService";
+import ResetPassPage from "./pages/authPages/resetPassPage/ResetPassPage";
 
 function App() {
   const {toggleSideBar} = useAppSelector(state => state.settings)
@@ -27,12 +30,12 @@ function App() {
   }, [location])
 
     useEffect(() => {
-        dispatch(refresh())
+        if(localStorage.getItem('token')){
+            console.log(localStorage.getItem('token'), ' token')
+            dispatch(refresh())
+        }
     }, [])
 
-    useEffect(() => {
-        console.log('render')
-    }, [])
 
 
 
@@ -45,6 +48,8 @@ function App() {
         <Routes>
             <Route path='/signUp' element={isAuth ? <Navigate to='/' /> : <SignUpPage />} />
             <Route path='/signIn' element={isAuth ? <Navigate to='/' /> : <SignInPage />} />
+            <Route path='/forgetPass' element={isAuth ? <Navigate to='/' /> : <ForgetPassPage />} />
+            <Route path='/resetPassPage' element={<ResetPassPage />} />
             <Route path='/' element={<HomePage />} />
         </Routes>
       </div>

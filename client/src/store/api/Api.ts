@@ -1,6 +1,7 @@
 
 import axios  from 'axios';
 import {SignInType} from "../../types/authType/SignInType";
+import storageService from "../../utils/storageService/StorageService";
 
 const token: string | null = localStorage.getItem('token') ? localStorage.getItem('token') : null;
 
@@ -32,8 +33,8 @@ instance.interceptors.response.use((config) => {
     if (error.response.status == 401 && error.config && !error.config._isRetry) {
         originalRequest._isRetry = true;
         try {
-            const response = await axios.get<SignInType>(`${process.env.REACT_APP_PORT}/refresh`, {withCredentials: false})
-            localStorage.setItem('token', response.data.accessToken);
+            const response = await axios.get<SignInType>(`${process.env.REACT_APP_PORT}auth/refresh`, {withCredentials: true})
+            await storageService.setToken(response.data.accessToken)
             return instance.request(originalRequest);
         } catch (e) {
             console.log('НЕ АВТОРИЗОВАН')

@@ -11,11 +11,13 @@ import {ReqSignInType} from "../../../types/authType/ReqSignInType";
 import {SignInValidate} from "../../../utils/validation/SignInValidate";
 import { login } from '../../../store/features/authReducer/Auth_api';
 import './SignInPage.scss'
+import {useNavigate} from "react-router-dom";
 
 const SignInPage: FC = () => {
     const {load} = useAppSelector(state => state.auth)
     const initialValues: ReqSignInType = { email: '', password: ''};
     const dispatch = useAppDispatch()
+    const navigate = useNavigate()
 
     return (
         <div className='signUp_container'>
@@ -62,7 +64,7 @@ const SignInPage: FC = () => {
                                     {(errorMsg => <p className={'errorText'}>{errorMsg}</p>)}
                                 </ErrorMessage>
                             </CustomInput>
-                            <p className={'resetPassText'} >Забыли пароль?</p>
+                            <p className={'resetPassText'} onClick={() => navigate('/forgetPass')} >Забыли пароль?</p>
                             <SubmitBtn handleSubmit={handleSubmit} label='Вход' />
                         </form>
                     )}

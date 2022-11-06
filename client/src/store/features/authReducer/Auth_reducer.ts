@@ -1,12 +1,13 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import { UserType } from '../../../types/authType/UserType';
-import {login, logOut, refresh, registration} from "./Auth_api";
+import {forgetPass, login, logOut, refresh, registration, resetPass} from "./Auth_api";
 import {SignInType} from "../../../types/authType/SignInType";
 import storageService from "../../../utils/storageService/StorageService";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {SUCCESSSIGNUP} from "../../../configs/Messages";
 import {SignUpType} from "../../../types/authType/SignUpType";
+import {ForgetTypePass} from "../../../types/authType/ForgetTypePass";
 // @ts-ignore
 // toast.configure()
 
@@ -18,6 +19,7 @@ interface AuthState {
     error: string,
     userInfo: UserType | {},
     message: string,
+    success: boolean
 
 }
 
@@ -26,7 +28,8 @@ const initialState: AuthState = {
     load: false,
     error: '',
     userInfo: {},
-    message: ''
+    message: '',
+    success: false
 }
 
 export const AuthSlice = createSlice({
@@ -94,6 +97,38 @@ export const AuthSlice = createSlice({
         [logOut.rejected.type]: (state, action: PayloadAction<any>) => {
             state.load = false
         },
+
+        [forgetPass.pending.type]: (state) => {
+            state.load = true
+        },
+        [forgetPass.fulfilled.type]: (state, action: PayloadAction<ForgetTypePass>) => {
+            state.load = false
+            storageService.setForgetToken(action.payload.token)
+            toast.success(action.payload?.message)
+            state.error = ''
+        },
+        [forgetPass.rejected.type]: (state, action: PayloadAction<any>) => {
+            state.load = false
+            state.error = action.payload.response.data.message
+            toast.error(action.payload.response.data.message)
+        },
+
+        [resetPass.pending.type]: (state) => {
+            state.load = true
+        },
+        [resetPass.fulfilled.type]: (state, action: PayloadAction<{message: string}>) => {
+            state.load = false
+            toast.success(action.payload?.message)
+            state.error = ''
+            state.success = true
+        },
+        [resetPass.rejected.type]: (state, action: PayloadAction<any>) => {
+            state.load = false
+            state.error = action.payload.response.data.message
+            toast.error(action.payload.response.data.message)
+            state.success = false
+        },
+
     }
 })
 
