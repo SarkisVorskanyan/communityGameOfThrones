@@ -7,7 +7,7 @@ interface CustomInputProps {
     handleChange: (e: React.ChangeEvent<any>) => void,
     value?: string,
     name?: string,
-    touched: boolean | undefined,
+    touched?: boolean | undefined,
     type?: string,
     children: React.ReactNode
     [x: string]: any

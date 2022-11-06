@@ -2,23 +2,21 @@ import UserModel from '../database/models/UserModel.js';
 import TokenServices from '../services/TokenServices.js';
 import UserServices from './../services/UserServices.js';
 import bcrypt from 'bcrypt'
-import { UserDataToken_dto } from '../dto/UserDataToken_dto.js';
-import { validationResult } from "express-validator";
-import { User_dto } from './../dto/User_dto.js';
+import {UserDataToken_dto} from '../dto/UserDataToken_dto.js';
+import {validationResult} from "express-validator";
+import {User_dto} from './../dto/User_dto.js';
 import {
     EMAIL_INCORRECT,
-    getMessage, INCORRECT_LINK, SUCCESS_RESET_PASS,
+    INCORRECT_LINK,
+    SUCCESS_RESET_PASS,
     SUCCESS_SEND_RESET_PASS,
     SUCCESS_SIGNUP,
     VALIDATION_ERROR
 } from './../configs/Messages.js';
-import logger from '../logger/Logger.js';
+import Logger from '../logger/Logger.js';
 import * as uuid from 'uuid';
 import MailServices from '../services/MailServices.js';
 import RoleModal from '../database/models/RoleModal.js';
-import ApiError from "../error/ApiError.js";
-import jwt from "jsonwebtoken";
-import Logger from "../logger/Logger.js";
 import ApiError from "../error/ApiError.js";
 import jwt from "jsonwebtoken";
 
@@ -77,7 +75,6 @@ class AuthController {
     async refresh(req, res, next){
         try {
             const {refreshToken} = req.cookies
-            console.log(refreshToken, ' refreshToken')
             const userData = await UserServices.refresh(refreshToken)
 
             res.cookie('refreshToken', userData.refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true})
@@ -92,7 +89,7 @@ class AuthController {
         try{
             const activationLink = req.params.link
             await UserServices.activate(activationLink)
-            return res.redirect(process.env.CLIENT_URL)
+            return res.redirect(`${process.env.CLIENT_URL}signIn`)
         }catch (e) {
             Logger.error(e)
             next(e)
@@ -108,7 +105,8 @@ class AuthController {
             }
             const link = uuid.v4()
             const passToken = jwt.sign({email, link}, process.env.FORGET_PASSWORD_TOKEN, {expiresIn: '5m'})
-            await MailServices.SendResetPassword(email, `${process.env.API_WEB_URL}`)
+            console.log(`${process.env.CLIENT_URL}resetPassPage`, ' link')
+            await MailServices.SendResetPassword(email, `${process.env.CLIENT_URL}resetPassPage`)
             user.resetPassLink = passToken
             user.save()
             res.json({

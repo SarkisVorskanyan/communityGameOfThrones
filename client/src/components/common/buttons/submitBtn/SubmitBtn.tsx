@@ -1,6 +1,5 @@
 import React, { FC, ReactNode } from 'react'
 import './SubmitBtn.scss'
-import {log} from "util";
 
 interface SubmitBtnProps {
     label: string,

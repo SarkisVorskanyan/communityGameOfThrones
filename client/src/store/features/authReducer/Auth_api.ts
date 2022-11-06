@@ -4,6 +4,8 @@ import {ReqSignUpType} from "../../../types/authType/ReqSIgnUpType";
 import {SignInType} from "../../../types/authType/SignInType";
 import {SignUpType} from "../../../types/authType/SignUpType";
 import {ReqSignInType} from "../../../types/authType/ReqSignInType";
+import {ForgetTypePass} from "../../../types/authType/ForgetTypePass";
+import {ReqResetPassType} from "../../../types/authType/ReqResetPassType";
 
 
 export const registration = createAsyncThunk(
@@ -65,3 +67,32 @@ export const logOut = createAsyncThunk(
         }
     }
 )
+
+export const forgetPass = createAsyncThunk(
+    'auth/forgetPass',
+    async (data: {email: string}, thunkAPI) => {
+        try{
+            const response = await instance.post<ForgetTypePass>('auth/forgetPass', {email: data})
+            return response.data
+        }
+        catch (e) {
+            console.log(e, ' error')
+            return thunkAPI.rejectWithValue(e)
+        }
+    }
+)
+
+export const resetPass = createAsyncThunk(
+    'auth/resetPass',
+    async (data: ReqResetPassType, thunkAPI) => {
+        try{
+            const response = await instance.put<{message: string}>(`auth/resetPass/${data?.token}`, {password: data?.password})
+            return response.data
+        }
+        catch (e) {
+            console.log(e, ' resetPass')
+            return thunkAPI.rejectWithValue(e)
+        }
+    }
+)
+
