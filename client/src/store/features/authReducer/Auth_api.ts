@@ -4,8 +4,8 @@ import {ReqSignUpType} from "../../../types/authType/ReqSIgnUpType";
 import {SignInType} from "../../../types/authType/SignInType";
 import {SignUpType} from "../../../types/authType/SignUpType";
 import {ReqSignInType} from "../../../types/authType/ReqSignInType";
-import {ForgetTypePass} from "../../../types/authType/ForgetTypePass";
-import {ReqResetPassType} from "../../../types/authType/ReqResetPassType";
+import { ForgetTypePass } from "../../../types/authType/ForgetTypePass";
+import { ReqResetPassType } from "../../../types/authType/ReqResetPassType";
 
 
 export const registration = createAsyncThunk(

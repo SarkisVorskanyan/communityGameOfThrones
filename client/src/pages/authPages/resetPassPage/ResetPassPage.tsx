@@ -25,6 +25,7 @@ const ResetPassPage: FC = () => {
     useEffect(() => {
         if(success){
             navigate('/signIn')
+            localStorage.removeItem('forgetToken')
         }
     }, [success])
 
