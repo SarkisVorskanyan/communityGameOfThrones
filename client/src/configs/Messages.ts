@@ -11,3 +11,7 @@ export const CONFIRM_PASSWORD: string = 'Пароли не совпадают'
 //Auth messages
 
 export const SUCCESSSIGNUP: string = 'Вы успешно зарегистрировани, проверте ваша электронная почта'
+
+//Log messages
+
+export const LOGINFOEMAIL: string = 'Нужно активировать Email, чтобы были доступны все функции'

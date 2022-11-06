@@ -17,7 +17,7 @@ interface AuthState {
     isAuth: boolean,
     load: boolean,
     error: string,
-    userInfo: UserType | {},
+    userInfo: UserType | null,
     message: string,
     success: boolean
 
@@ -27,7 +27,7 @@ const initialState: AuthState = {
     isAuth: false,
     load: false,
     error: '',
-    userInfo: {},
+    userInfo: null,
     message: '',
     success: false
 }
@@ -89,7 +89,7 @@ export const AuthSlice = createSlice({
         },
         [logOut.fulfilled.type]: (state, action: PayloadAction<any>) => {
             state.load = false
-            state.userInfo = {}
+            state.userInfo = null
             localStorage.removeItem('token')
             state.isAuth = false
             state.error = ''

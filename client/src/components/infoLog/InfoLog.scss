@@ -1,0 +1,19 @@
+@import "../../styles/Variables.scss";
+
+.container{
+  display: flex;
+  flex-direction: row;
+  border: 1px solid $infoLogBorderColor;
+  border-radius: 10px;
+  background-color: $infoLogColor;
+  padding: 10px;
+  .infoText{
+    flex: 3;
+    p{
+      font-size: 15px;
+    }
+  }
+  .close {
+    cursor: pointer;
+  }
+}

@@ -45,7 +45,6 @@ const ResetPassPage: FC = () => {
                     initialValues={initialValues}
                     validationSchema={ResetPassValidate}
                     onSubmit={ (values, action) => {
-                        console.log(values?.password, ' values')
                         changePassword(values)
                         action.resetForm()
                     }}
