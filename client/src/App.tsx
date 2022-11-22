@@ -21,6 +21,7 @@ function App() {
   const dispatch = useAppDispatch()
 
 
+
   useEffect(() => {
     if(location.pathname === '/signIn' || location.pathname === '/signUp'){
       setShowSideBar(false)
@@ -43,7 +44,7 @@ function App() {
       <Toaster />
       <Header showSideBar={showSideBar} />
       {showSideBar && <SideBar />}
-      <div style={{padding: !showSideBar ? '40px 8%' : toggleSideBar ? '40px 8% 40px 34%' : '40px 8%'}}>
+      <div style={{padding: !showSideBar ? '40px 8%' : toggleSideBar ? '40px 8% 40px 25%' : '40px 8%'}}>
         <Routes>
             <Route path='/signUp' element={isAuth ? <Navigate to='/' /> : <SignUpPage />} />
             <Route path='/signIn' element={isAuth ? <Navigate to='/' /> : <SignInPage />} />

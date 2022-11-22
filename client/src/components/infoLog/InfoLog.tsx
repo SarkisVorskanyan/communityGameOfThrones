@@ -8,7 +8,7 @@ interface InfoLogProps {
 
 const InfoLog: FC <InfoLogProps> = ({text, setShowInfoLog}) => {
     return (
-        <div className={'container'}>
+        <div className={'infoLogContainer'}>
             <div className={'infoText'}>
                 <p>{text}</p>
             </div>

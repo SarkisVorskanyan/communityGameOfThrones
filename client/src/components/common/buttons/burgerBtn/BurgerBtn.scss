@@ -2,15 +2,13 @@
 @import '../../../../styles/@mixin.scss';
 
 .burgerBtn_container{
-    background: $mainColor;
-    width: 50px;
-    height: 50px;
-    cursor: pointer;
-    border: 1px solid;
-    padding: 5px;
-}
-
-svg {
+  background: $mainColor;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  border: 1px solid;
+  padding: 5px;
+  svg {
     fill-rule: evenodd;
     clip-rule: evenodd;
     stroke-linecap: round;
@@ -65,3 +63,5 @@ svg {
   .rocket #top {
     stroke-dasharray: 30, 88;
   }
+}
+

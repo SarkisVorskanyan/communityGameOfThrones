@@ -4,7 +4,7 @@
 .header_container{
     background-color: $mainColor;
     border: 1px solid;
-    @include spaceBetweemContainer();
+    @include spaceBetweenContainer();
     .leftSide_header{
         padding: 20px 40px;
         display: flex;

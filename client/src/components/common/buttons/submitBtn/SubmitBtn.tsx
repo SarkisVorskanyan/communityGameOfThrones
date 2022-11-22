@@ -13,7 +13,7 @@ const SubmitBtn: FC <SubmitBtnProps> = ({label, handleSubmit }) => {
                 <span className="mask">{label}</span>
                 <button
                     onClick={() => handleSubmit()}
-                    onKeyPress={(e: React.KeyboardEvent<HTMLElement>) => console.log(e.key)}
+                    onKeyPress={(e: React.KeyboardEvent<HTMLElement>) => console.log(e.keyCode)}
                     type="submit"
                     name="Hover">{label}</button>
             </div>
