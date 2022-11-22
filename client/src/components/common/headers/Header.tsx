@@ -3,7 +3,6 @@ import BurgerBtn from '../buttons/burgerBtn/BurgerBtn'
 import './Header.scss'
 import { BiCaretDown } from "react-icons/bi";
 import { NavLink, useNavigate } from 'react-router-dom';
-import { createRipple } from './../../../helpers/styleEffects/RipplyEffect';
 import {useAppDispatch, useAppSelector} from "../../../store/StoreHooks";
 import {logOut, refresh} from "../../../store/features/authReducer/Auth_api";
 
@@ -28,7 +27,7 @@ const Header: FC <HeaderProps> = ({showSideBar}) => {
             </div>
             <div className='rightSide_header'>
                 <div className='auth_btn'>
-                    <BiCaretDown size='2rem' />
+                    <BiCaretDown strokeWidth="1" stroke={'white'} size='2rem' />
                     {/*<div className='auth_list'>*/}
                         <ul className='auth_list'>
                             {!isAuth ? <li onClick={() => navigate('/signIn')}>

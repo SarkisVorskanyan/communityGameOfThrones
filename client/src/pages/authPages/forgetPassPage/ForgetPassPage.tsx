@@ -42,15 +42,17 @@ const ForgetPassPage: FC = () => {
             {load ? <Spinner /> : null}
             <div className='signUp_subContainer'>
                 <FormTitle title='Забыли пароль?' />
-                <CustomInput handleChange={(e) => handleChange(e)}
-                             value={value}
-                             label={'email'} >
-                    <p className={'errorText'}>{validateError}</p>
-                </CustomInput>
+                <form>
+                    <CustomInput handleChange={(e) => handleChange(e)}
+                                 value={value}
+                                 label={'email'} >
+                        <p className={'errorText'}>{validateError}</p>
+                    </CustomInput>
 
-                {!showTimer ? <SubmitBtn label={'Отправит сообщение'} handleSubmit={sendMail}/> : (
-                    <TimerSendEmail setShowTimer={setShowTimer} />
-                )}
+                    {!showTimer ? <SubmitBtn label={'Отправит сообщение'} handleSubmit={sendMail}/> : (
+                        <TimerSendEmail setShowTimer={setShowTimer} />
+                    )}
+                </form>
             </div>
         </div>
     )
