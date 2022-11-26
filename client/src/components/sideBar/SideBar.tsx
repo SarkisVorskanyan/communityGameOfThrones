@@ -4,22 +4,35 @@ import './SideBar.scss'
 import { RiAdminLine } from 'react-icons/ri';
 import { IoIosArrowDown } from 'react-icons/io';
 import { SideBarData } from '../../utils/data/SidebarData/SideBarData';
+import { NavLink } from 'react-router-dom';
+import { SideBarDataType } from './../../types/data/SideBarDataTypes/SideBarDataType';
+import { useAppDispatch } from './../../store/StoreHooks';
+import { setSubMenuId } from '../../store/features/settingsReducer/Settings_reducer';
+import { checkSuccess } from '../../helpers/customHelpers/CustomHelpers';
 
 const SideBar: FC = () => {
     const {toggleSideBar} = useAppSelector(state => state.settings)
-    const [subMenuId, setSubMenuId] = useState<number | null>(null)
+    const {userInfo} = useAppSelector(state => state.auth)
+    //const [subMenuId, setSubMenuId] = useState<number | null>(null)
+    const {subMenuId} = useAppSelector(state => state.settings)
+    const dispatch = useAppDispatch()
 
-    const openOrCloseSubMenu = (index: number | null) => {
-
-        if(index === subMenuId){
-            setSubMenuId(null)
+    const openOrCloseSubMenu = (item: SideBarDataType, index: number, e: React.MouseEvent) => {
+        e.stopPropagation()
+        if(item?.subMenu){
+            if(index === subMenuId){
+                dispatch(setSubMenuId(null))
+            }else{
+                dispatch(setSubMenuId(index))
+            }
         }else{
-            setSubMenuId(index)
+            dispatch(setSubMenuId(null))
         }
+        
     }
 
     useEffect(() => {
-        setSubMenuId(null)
+        dispatch(setSubMenuId(null))
     }, [toggleSideBar])
 
 
@@ -27,78 +40,45 @@ const SideBar: FC = () => {
         <div className={toggleSideBar ? 'sideBar_container_active' : 'sideBar_container'}>
             <div className='sidebar_subContainer'>
                 <ul className={'nav-links'}>
-                    {SideBarData.map((item, index) =>
-                        <li style={{overflow: index === subMenuId ? 'visible' : 'hidden'}} key={index}>
-                            <div className={'link_item'}
-                                 onClick={() => item?.subMenu ? openOrCloseSubMenu(index) : openOrCloseSubMenu(null)}
-                                 style={{justifyContent: toggleSideBar ? 'space-between' : 'flex-end'}}>
-                            <span>
-                                <span className={toggleSideBar ? 'sideBar_icon' : 'sideBar_icon_inActive'}>
-                                    {item.icon}
-                                </span>
-                                {/*<RiAdminLine className={toggleSideBar ? 'sideBar_icon' : 'sideBar_icon_inActive'}/>*/}
-                                {toggleSideBar ? <a>{item.name}</a> : null}
-                            </span>
-                                {item?.subMenu && toggleSideBar ? <IoIosArrowDown
-                                                                        className={index === subMenuId ? 'arrow_up' : 'arrow_down'} /> : null}
-                            </div>
+                    {SideBarData.map((item, index) => (
+                        checkSuccess(item?.for, userInfo?.role) ? (
+                            <li style={{overflow: index === subMenuId ? 'visible' : 'hidden'}} key={index}>
+                                <div className={'link_item'}
+                                     onClick={(e:  React.MouseEvent) => openOrCloseSubMenu(item, index, e)}
+                                     style={{justifyContent: toggleSideBar ? 'space-between' : 'flex-end'}}>
+                                    <span>
+                                        <span className={toggleSideBar ? 'sideBar_icon' : 'sideBar_icon_inActive'}>
+                                            {item.icon}
+                                        </span>
+                                        {/*<RiAdminLine className={toggleSideBar ? 'sideBar_icon' : 'sideBar_icon_inActive'}/>*/}
+                                        {toggleSideBar ? <NavLink to={item?.url}>{item.name}</NavLink> : null}
+                                    </span>
+                                    {item?.subMenu && toggleSideBar ? <IoIosArrowDown
+                                        className={index === subMenuId ? 'arrow_up' : 'arrow_down'} /> : null}
+                                </div>
 
-                            {item?.subMenu ? (
-                                <ul className={index === subMenuId ? toggleSideBar ? 'sub_menu_active' : 'sub_menu_close' : 'sub_menu'}>
-                                    {item?.subMenu.map((itemSubMenu, subMenuIndex) =>
-                                        <li key={subMenuIndex}>
-                                            <a>{itemSubMenu.subMenuName}</a>
-                                        </li>
-                                    )}
-                                </ul>
-                            ) : null}
+                                {item?.subMenu ? (
+                                    <ul className={index === subMenuId ? toggleSideBar ? 'sub_menu_active' : 'sub_menu_close' : 'sub_menu'}>
+                                        {item?.subMenu.map((itemSubMenu, subMenuIndex) => (
+                                            checkSuccess(itemSubMenu?.for, userInfo?.role) ? (
+                                                <li key={subMenuIndex}>
+                                                    <NavLink to={itemSubMenu?.subMenuUrl}>{itemSubMenu.subMenuName}</NavLink>
+                                                </li>
+                                            ) : null
+                                            )
 
-                            {/*{item?.subMenu ? (*/}
-                            {/*    item?.subMenu.map((itemSubMenu, subMenuIndex) =>*/}
-                            {/*        <ul key={subMenuIndex} className={index === subMenuId ? 'sub_menu_active' : 'sub_menu'}>*/}
-                            {/*            <li>*/}
-                            {/*                <a>{itemSubMenu.subMenuName}</a>*/}
-                            {/*            </li>*/}
-                            {/*        </ul>*/}
-                            {/*    )*/}
-                            {/*) : null}*/}
-                        </li>
+                                        )}
+                                    </ul>
+                                ) : null}
+
+                            </li>
+                        ) : null
+                        )
+
                     )}
 
                 </ul>
 
-                {/*<ul>*/}
-                {/*    {SideBarData.map((item, index) =>*/}
-                {/*        <li><a href="#">Dropdown</a>*/}
-                {/*            <ul>*/}
-                {/*                <li><a href="#">Secondary</a></li>*/}
-                {/*                <li><a href="#">Secondary</a></li>*/}
-                {/*                <li><a href="#">Secondary</a></li>*/}
-                {/*            </ul>*/}
-                {/*        </li>*/}
-                {/*    )}*/}
-                {/*    <li><a href="#">Dropdown</a>*/}
-                {/*        <ul>*/}
-                {/*            <li><a href="#">Secondary</a></li>*/}
-                {/*            <li><a href="#">Secondary</a></li>*/}
-                {/*            <li><a href="#">Secondary</a></li>*/}
-                {/*        </ul>*/}
-                {/*    </li>*/}
-                {/*    <li><a href="#">Dropdown</a>*/}
-                {/*        <ul>*/}
-                {/*            <li><a href="#">Secondary</a></li>*/}
-                {/*            <li><a href="#">Secondary</a></li>*/}
-                {/*            <li><a href="#">Secondary</a></li>*/}
-                {/*        </ul>*/}
-                {/*    </li>*/}
-                {/*    <li><a href="#">Dropdown</a>*/}
-                {/*        <ul>*/}
-                {/*            <li><a href="#">Secondary</a></li>*/}
-                {/*            <li><a href="#">Secondary</a></li>*/}
-                {/*            <li><a href="#">Secondary</a></li>*/}
-                {/*        </ul>*/}
-                {/*    </li>*/}
-                {/*</ul>*/}
             </div>
         </div>
 

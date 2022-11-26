@@ -50,6 +50,7 @@ class AuthController {
             const UserDataToken = new UserDataToken_dto(user)
             const tokens = TokenServices.generateTokens({...UserDataToken})
             await TokenServices.saveToken(UserDataToken.id, tokens.refreshToken)
+            res.cookie('refreshToken', tokens.refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true})
             res.json({
                 ...tokens,
                 User
@@ -149,7 +150,6 @@ class AuthController {
 
     async getUsers(req, res, next){
         try{
-            console.log(req.headers.authorization)
             const users = await UserModel.find()
             return res.json(users)
         }catch (e) {
