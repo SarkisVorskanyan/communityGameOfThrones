@@ -12,10 +12,13 @@ import { refresh } from './store/features/authReducer/Auth_api';
 import ForgetPassPage from "./pages/authPages/forgetPassPage/ForgetPassPage";
 import storageService from "./utils/storageService/StorageService";
 import ResetPassPage from "./pages/authPages/resetPassPage/ResetPassPage";
+import AdminUsers from './pages/adminPages/adminUsers/AdminUsers';
+import { setSubMenuId } from './store/features/settingsReducer/Settings_reducer';
+import {checkSuccess} from "./helpers/customHelpers/CustomHelpers";
 
 function App() {
   const {toggleSideBar} = useAppSelector(state => state.settings)
-  const {isAuth} = useAppSelector(state => state.auth)
+  const {isAuth, userInfo} = useAppSelector(state => state.auth)
   const [showSideBar, setShowSideBar] = useState<boolean>(true)
   const location = useLocation()
   const dispatch = useAppDispatch()
@@ -36,20 +39,33 @@ function App() {
         }
     }, [])
 
+    const outClick = () => {
+      dispatch(setSubMenuId(null))
+    }
+
+    useEffect(() => {
+        console.log(userInfo, ' userInfo')
+    }, [userInfo])
 
 
 
   return (
-    <div className="App">
+    <div onClick={outClick} className="App">
       <Toaster />
       <Header showSideBar={showSideBar} />
       {showSideBar && <SideBar />}
-      <div style={{padding: !showSideBar ? '40px 8%' : toggleSideBar ? '40px 8% 40px 25%' : '40px 8%'}}>
+      <div style={{padding: !showSideBar ? '40px 8%' : toggleSideBar ? '40px 8% 40px 23%' : '40px 8%'}}>
         <Routes>
+            {/* Auth pages */}
             <Route path='/signUp' element={isAuth ? <Navigate to='/' /> : <SignUpPage />} />
             <Route path='/signIn' element={isAuth ? <Navigate to='/' /> : <SignInPage />} />
             <Route path='/forgetPass' element={isAuth ? <Navigate to='/' /> : <ForgetPassPage />} />
             <Route path='/resetPassPage' element={<ResetPassPage />} />
+            {/* Admin pages */}
+            <Route path='/adminUsers' element={checkSuccess('owner', userInfo?.role) ? <AdminUsers /> : <HomePage />} />
+            {/*<Route path='/adminUsers' element={<AdminUsers />} />*/}
+
+            {/* Custom */}
             <Route path='/' element={<HomePage />} />
         </Routes>
       </div>
