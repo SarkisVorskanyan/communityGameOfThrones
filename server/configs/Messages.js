@@ -1,4 +1,3 @@
-
 export const VALIDATION_ERROR = 'Ошибка валидаии'
 export const DOES_NOT_VALID_EMAIL = 'Это не валидный email'
 export const REQUIRED_NAME = 'Имя обязително'
@@ -11,6 +10,7 @@ export const INCORRECT_LINK = 'Это не правилнйй адресс'
 export const SUCCESS_SIGNUP = 'Вы успешно зарегистрировани, проверте ваша электронная почта'
 export const SUCCESS_SEND_RESET_PASS = 'Для изменение пароля, зайдите вашу электронную почту'
 export const SUCCESS_RESET_PASS = 'Пароль был успешно изменен'
+export const CREATE_NEW_ROLE_ERROR = 'Tакого Рола уже существует'
 
 export function getMessage (type, value = ''){
     switch (type) {

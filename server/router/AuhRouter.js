@@ -18,7 +18,6 @@ router.get('/refresh', AuthController.refresh)
 router.get('/activate/:link', AuthController.activate)
 router.post('/forgetPass', AuthController.forgetPass)
 router.put('/resetPass/:token', AuthController.resetPass)
-router.get('/user', AuthMiddleware, AuthController.getUsers)
 
 
 export default router

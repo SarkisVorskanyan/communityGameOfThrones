@@ -16,6 +16,11 @@ export const SideBarData: SideBarDataType[] = [
                 subMenuUrl: '/adminUsers',
                 for: 'owner'
             },
+            {
+                subMenuName: 'Ролы',
+                subMenuUrl: '/adminRoles',
+                for: 'owner'
+            },
         ]
     },
 ]

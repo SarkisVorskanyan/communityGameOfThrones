@@ -1,0 +1,14 @@
+@import '../../../styles/@mixin.scss';
+
+.container{
+  .mainTitle{
+    @include mainTitle()
+  }
+  .input_container{
+      width: 50%;
+    .errorText{
+      @include formError()
+    }
+  }
+
+}

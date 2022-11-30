@@ -1,6 +1,6 @@
 import React, {FC, useEffect, useState} from 'react'
 import FormTitle from "../../../components/common/titles/FormTitle";
-import CustomInput from "../../../components/common/inputs/CustomInput";
+import CustomInput from "../../../components/common/inputs/customInput/CustomInput";
 import {ErrorMessage} from "formik";
 import SubmitBtn from "../../../components/common/buttons/submitBtn/SubmitBtn";
 import {EMAIL_ERROR, REQUIRED} from "../../../configs/Messages";

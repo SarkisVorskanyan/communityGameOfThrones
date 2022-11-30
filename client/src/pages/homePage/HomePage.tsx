@@ -6,20 +6,17 @@ import {useAppSelector} from "../../store/StoreHooks";
 
 const HomePage: FC = () => {
 
-    const {userInfo} = useAppSelector(state => state.auth)
+    const {userInfo, isAuth} = useAppSelector(state => state.auth)
     const [showInfoLog, setShowInfoLog] = useState<boolean>(false)
 
     const closeShowLog = () => {
         setShowInfoLog(false)
     }
 
-    useEffect(() => {
-        console.log(userInfo?.role)
-    }, [userInfo])
 
 
     useEffect(() => {
-        if(!userInfo?.isActivated){
+        if(isAuth && !userInfo?.isActivated){
             setShowInfoLog(true)
         }else{
             setShowInfoLog(false)
