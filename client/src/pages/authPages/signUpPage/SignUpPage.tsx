@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react'
-import CustomInput from '../../../components/common/inputs/CustomInput'
+import CustomInput from '../../../components/common/inputs/customInput/CustomInput'
 import FormTitle from '../../../components/common/titles/FormTitle'
 import './SignUpPage.scss'
 import {ErrorMessage, Formik} from 'formik';

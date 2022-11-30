@@ -3,7 +3,7 @@ import Spinner from "../../../components/common/loading/spinner/Spinner";
 import FormTitle from "../../../components/common/titles/FormTitle";
 import {ErrorMessage, Formik} from "formik";
 import {SignUpValidate} from "../../../utils/validation/SignUpValidate";
-import CustomInput from "../../../components/common/inputs/CustomInput";
+import CustomInput from "../../../components/common/inputs/customInput/CustomInput";
 import SubmitBtn from "../../../components/common/buttons/submitBtn/SubmitBtn";
 import {useAppDispatch, useAppSelector} from "../../../store/StoreHooks";
 import {ReqSignUpType} from "../../../types/authType/ReqSIgnUpType";

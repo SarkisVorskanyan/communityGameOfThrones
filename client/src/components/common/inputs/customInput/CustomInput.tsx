@@ -1,5 +1,5 @@
 import React, { FC, ReactNode } from 'react'
-import './Input.scss'
+import './CustomInput.scss'
 
 interface CustomInputProps {
     label?: string,

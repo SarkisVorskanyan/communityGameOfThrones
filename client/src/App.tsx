@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import './App.scss';
-import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
+import {Navigate, Route, Routes, useLocation} from 'react-router-dom';
 import SignUpPage from './pages/authPages/signUpPage/SignUpPage';
 import SignInPage from './pages/authPages/signInPage/SignInPage';
 import HomePage from './pages/homePage/HomePage';
@@ -8,13 +8,12 @@ import Header from './components/common/headers/Header';
 import SideBar from './components/sideBar/SideBar';
 import {useAppDispatch, useAppSelector} from './store/StoreHooks';
 import Toaster from "./components/common/toaster/Toaster";
-import { refresh } from './store/features/authReducer/Auth_api';
+import {refresh} from './store/features/authReducer/Auth_api';
 import ForgetPassPage from "./pages/authPages/forgetPassPage/ForgetPassPage";
-import storageService from "./utils/storageService/StorageService";
 import ResetPassPage from "./pages/authPages/resetPassPage/ResetPassPage";
 import AdminUsers from './pages/adminPages/adminUsers/AdminUsers';
-import { setSubMenuId } from './store/features/settingsReducer/Settings_reducer';
 import {checkSuccess} from "./helpers/customHelpers/CustomHelpers";
+import AdminRoles from "./pages/adminPages/adminRoles/AdminRoles";
 
 function App() {
   const {toggleSideBar} = useAppSelector(state => state.settings)
@@ -22,6 +21,8 @@ function App() {
   const [showSideBar, setShowSideBar] = useState<boolean>(true)
   const location = useLocation()
   const dispatch = useAppDispatch()
+
+
 
 
 
@@ -39,18 +40,9 @@ function App() {
         }
     }, [])
 
-    const outClick = () => {
-      dispatch(setSubMenuId(null))
-    }
-
-    useEffect(() => {
-        console.log(userInfo, ' userInfo')
-    }, [userInfo])
-
-
 
   return (
-    <div onClick={outClick} className="App">
+    <div className="App">
       <Toaster />
       <Header showSideBar={showSideBar} />
       {showSideBar && <SideBar />}
@@ -62,14 +54,14 @@ function App() {
             <Route path='/forgetPass' element={isAuth ? <Navigate to='/' /> : <ForgetPassPage />} />
             <Route path='/resetPassPage' element={<ResetPassPage />} />
             {/* Admin pages */}
-            <Route path='/adminUsers' element={checkSuccess('owner', userInfo?.role) ? <AdminUsers /> : <HomePage />} />
-            {/*<Route path='/adminUsers' element={<AdminUsers />} />*/}
+            <Route path='/adminUsers' element={checkSuccess('owner', userInfo?.role) ?  <AdminUsers /> : <HomePage />} />
+            <Route path='/adminRoles' element={checkSuccess('owner', userInfo?.role) ?  <AdminRoles /> : <HomePage />} />
 
             {/* Custom */}
             <Route path='/' element={<HomePage />} />
         </Routes>
       </div>
-      
+
     </div>
   );
 }

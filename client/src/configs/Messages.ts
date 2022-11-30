@@ -15,3 +15,7 @@ export const SUCCESSSIGNUP: string = 'Вы успешно зарегистрир
 //Log messages
 
 export const LOGINFOEMAIL: string = 'Нужно активировать Email, чтобы были доступны все функции'
+
+//Admin messages
+
+export const CREATENEWROLE: string = 'Вы успешно добавили новый рол'

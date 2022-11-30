@@ -61,8 +61,8 @@ export const AuthSlice = createSlice({
             state.load = false
             state.userInfo = action.payload.user
             storageService.setToken(action.payload.accessToken)
-            state.isAuth = true
             state.error = ''
+            state.isAuth = true
         },
         [login.rejected.type]: (state, action: PayloadAction<any>) => {
             state.load = false
