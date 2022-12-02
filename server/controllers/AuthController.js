@@ -46,15 +46,15 @@ class AuthController {
     async login(req, res, next){
         try {
             const {email, password} = req.body
-            const user = await UserServices.checkLogin(email, password)
-            const User = new User_dto(user)
-            const UserDataToken = new UserDataToken_dto(user)
+            const User = await UserServices.checkLogin(email, password)
+            const user = new User_dto(User)
+            const UserDataToken = new UserDataToken_dto(User)
             const tokens = TokenServices.generateTokens({...UserDataToken})
             await TokenServices.saveToken(UserDataToken.id, tokens.refreshToken)
             res.cookie('refreshToken', tokens.refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true})
             res.json({
                 ...tokens,
-                User
+                user
             })
         } catch (e) {
             Logger.error(e)

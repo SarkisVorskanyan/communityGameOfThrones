@@ -1,7 +1,7 @@
 import {combineReducers, configureStore} from "@reduxjs/toolkit";
+import Admin_reducer from "./features/adminReducer/Admin_reducer";
 import Auth_reducer from "./features/authReducer/Auth_reducer";
 import Settings_reducer from "./features/settingsReducer/Settings_reducer";
-import Admin_reducer from "./features/adminReducer/Admin_reducer";
 
 
 const rootReducer = combineReducers({

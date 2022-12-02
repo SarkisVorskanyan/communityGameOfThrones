@@ -2,7 +2,7 @@ import React, { FC, useState } from 'react'
 import { useAppSelector } from '../../../../store/StoreHooks'
 import './BurgerBtn.scss'
 import { useAppDispatch } from './../../../../store/StoreHooks';
-import { setTogleSideBar } from '../../../../store/features/settingsReducer/Settings_reducer';
+import { setToggleSideBar } from '../../../../store/features/settingsReducer/Settings_reducer';
 
 const BurgerBtn: FC = () => {
     
@@ -14,7 +14,7 @@ const BurgerBtn: FC = () => {
             <div className="icons">
           <svg
             className={toggleSideBar ? 'active' : ''}
-            onClick={() => dispatch(setTogleSideBar(!toggleSideBar))}
+            onClick={() => dispatch(setToggleSideBar(!toggleSideBar))}
             width="50"
             height="50"
             viewBox="0 0 32 42"

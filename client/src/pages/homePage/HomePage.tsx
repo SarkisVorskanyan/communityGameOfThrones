@@ -1,12 +1,12 @@
 import React, {FC, useEffect, useState} from 'react'
 import InfoLog from "../../components/infoLog/InfoLog";
 import {LOGINFOEMAIL} from "../../configs/Messages";
-import {useSelector} from "react-redux";
-import {useAppSelector} from "../../store/StoreHooks";
+import {useAppDispatch, useAppSelector} from "../../store/StoreHooks";
 
 const HomePage: FC = () => {
 
     const {userInfo, isAuth} = useAppSelector(state => state.auth)
+    const dispatch = useAppDispatch()
     const [showInfoLog, setShowInfoLog] = useState<boolean>(false)
 
     const closeShowLog = () => {
@@ -21,7 +21,7 @@ const HomePage: FC = () => {
         }else{
             setShowInfoLog(false)
         }
-    }, [])
+    }, [isAuth])
 
     return (
         <div>
