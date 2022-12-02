@@ -2,12 +2,12 @@ import React, {FC, useEffect, useRef, useState} from 'react'
 import {useAppSelector} from '../../store/StoreHooks'
 import './SideBar.scss'
 import {IoIosArrowDown} from 'react-icons/io';
-import {SideBarData} from '../../utils/constants/SidebarData/SideBarData';
 import {NavLink, useNavigate} from 'react-router-dom';
 import {SideBarDataType} from './../../types/data/SideBarDataTypes/SideBarDataType';
 import {useAppDispatch} from './../../store/StoreHooks';
 import {checkSuccess} from '../../helpers/customHelpers/CustomHelpers';
-import useOnClickOutSide from "../../helpers/customHooks/UseOnClickOutSide";
+import useOnClickOutSide from '../../helpers/customHooks/UseOnClickOutSide'
+import {SideBarData} from '../../utils/constants/SidebarData/SideBarData';
 
 
 const SideBar: FC = () => {
@@ -16,6 +16,7 @@ const SideBar: FC = () => {
     const [subMenuId, setSubMenuId] = useState<number | null>(null)
     const ref = useRef<any>()
     const navigation = useNavigate()
+    const dispatch = useAppDispatch()
 
 
     const openOrCloseSubMenu = (item: SideBarDataType, index: number) => {
@@ -37,11 +38,6 @@ const SideBar: FC = () => {
         setSubMenuId(null)
     }, [toggleSideBar])
 
-    useEffect(() => {
-        if(isAuth && !userInfo){
-            window.location.reload();
-        }
-    }, [isAuth, userInfo])
 
     const navigateTo = (url: string) => {
         navigation(url)
@@ -100,3 +96,4 @@ const SideBar: FC = () => {
 }
 
 export default SideBar
+

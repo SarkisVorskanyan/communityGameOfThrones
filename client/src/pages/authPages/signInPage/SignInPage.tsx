@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, {FC, useEffect} from 'react'
 import Spinner from "../../../components/common/loading/spinner/Spinner";
 import FormTitle from "../../../components/common/titles/FormTitle";
 import {ErrorMessage, Formik} from "formik";
@@ -14,10 +14,16 @@ import './SignInPage.scss'
 import {useNavigate} from "react-router-dom";
 
 const SignInPage: FC = () => {
-    const {load} = useAppSelector(state => state.auth)
+    const {load, isAuth} = useAppSelector(state => state.auth)
     const initialValues: ReqSignInType = { email: '', password: ''};
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
+
+    useEffect(() => {
+        if(isAuth){
+            navigate('/')
+        }
+    }, [isAuth])
 
     return (
         <div className='signUp_container'>

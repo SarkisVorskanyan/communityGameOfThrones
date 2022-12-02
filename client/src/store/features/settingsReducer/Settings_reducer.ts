@@ -7,20 +7,20 @@ interface SettingsState {
 
 const initialState: SettingsState = {
     toggleSideBar: false,
-    
+
 }
 
 export const SettingsSlice = createSlice({
     name: 'settings',
     initialState,
     reducers: {
-        setTogleSideBar: (state, action: PayloadAction<boolean>) => {
+        setToggleSideBar: (state, action: PayloadAction<boolean>) => {
             state.toggleSideBar = action.payload
         },
      
     },
 })
 
-export const {setTogleSideBar} = SettingsSlice.actions
+export const {setToggleSideBar} = SettingsSlice.actions
 
 export default SettingsSlice.reducer;

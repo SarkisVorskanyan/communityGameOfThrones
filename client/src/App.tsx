@@ -13,11 +13,12 @@ import ForgetPassPage from "./pages/authPages/forgetPassPage/ForgetPassPage";
 import ResetPassPage from "./pages/authPages/resetPassPage/ResetPassPage";
 import AdminUsers from './pages/adminPages/adminUsers/AdminUsers';
 import {checkSuccess} from "./helpers/customHelpers/CustomHelpers";
-import AdminRoles from "./pages/adminPages/adminRoles/AdminRoles";
+import AdminRoles from './pages/adminPages/adminRoles/AdminRoles';
 
 function App() {
   const {toggleSideBar} = useAppSelector(state => state.settings)
-  const {isAuth, userInfo} = useAppSelector(state => state.auth)
+  const {isAuth, userInfo, load} = useAppSelector(state => state.auth)
+    const state = useAppSelector(state => state)
   const [showSideBar, setShowSideBar] = useState<boolean>(true)
   const location = useLocation()
   const dispatch = useAppDispatch()
@@ -39,6 +40,7 @@ function App() {
             dispatch(refresh())
         }
     }, [])
+
 
 
   return (
