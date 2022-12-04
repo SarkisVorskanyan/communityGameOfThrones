@@ -1,18 +1,18 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
 import { instance } from "../../api/Api"
-import {ReqSignUpType} from "../../../types/authType/ReqSIgnUpType";
-import {SignInType} from "../../../types/authType/SignInType";
-import {SignUpType} from "../../../types/authType/SignUpType";
-import {ReqSignInType} from "../../../types/authType/ReqSignInType";
-import { ForgetTypePass } from "../../../types/authType/ForgetTypePass";
-import { ReqResetPassType } from "../../../types/authType/ReqResetPassType";
+import {ReqSignUpType} from "../../../types/authTypes/ReqSIgnUpType";
+import {SignInType} from "../../../types/authTypes/SignInType";
+import {ResultMessageType} from "../../../types/customTypes/ResultMessageType";
+import {ReqSignInType} from "../../../types/authTypes/ReqSignInType";
+import { ForgetTypePass } from "../../../types/authTypes/ForgetTypePass";
+import { ReqResetPassType } from "../../../types/authTypes/ReqResetPassType";
 
 
 export const registration = createAsyncThunk(
     'auth/registration',
     async (data: ReqSignUpType, thunkAPI) => {
         try{
-            const response = await instance.post<SignUpType>('auth/registration', data)
+            const response = await instance.post<ResultMessageType>('auth/registration', data)
             return response.data
         }
         catch (e) {

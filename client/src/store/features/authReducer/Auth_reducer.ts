@@ -1,13 +1,13 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import { UserType } from '../../../types/authType/UserType';
+import { UserType } from '../../../types/usersTypes/UserType';
 import {forgetPass, login, logOut, refresh, registration, resetPass} from "./Auth_api";
-import {SignInType} from "../../../types/authType/SignInType";
+import {SignInType} from "../../../types/authTypes/SignInType";
 import storageService from "../../../utils/storageService/StorageService";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {SUCCESSSIGNUP} from "../../../configs/Messages";
-import {SignUpType} from "../../../types/authType/SignUpType";
-import {ForgetTypePass} from "../../../types/authType/ForgetTypePass";
+import {ResultMessageType} from "../../../types/customTypes/ResultMessageType";
+import {ForgetTypePass} from "../../../types/authTypes/ForgetTypePass";
 // @ts-ignore
 // toast.configure()
 
@@ -43,7 +43,7 @@ export const AuthSlice = createSlice({
         [registration.pending.type]: (state) => {
             state.load = true
         },
-        [registration.fulfilled.type]: (state, action: PayloadAction<SignUpType>) => {
+        [registration.fulfilled.type]: (state, action: PayloadAction<ResultMessageType>) => {
             state.load = false
             toast.success(action.payload?.message)
             state.error = ''

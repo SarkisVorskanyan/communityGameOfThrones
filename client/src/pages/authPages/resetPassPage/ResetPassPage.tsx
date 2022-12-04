@@ -6,7 +6,7 @@ import {CONFIRM_PASSWORD, EMAIL_ERROR, REQUIRED} from "../../../configs/Messages
 import {SignUpValidate} from "../../../utils/validation/SignUpValidate";
 import {ErrorMessage, Formik} from "formik";
 import {useAppDispatch, useAppSelector} from "../../../store/StoreHooks";
-import {ReqSignUpType} from "../../../types/authType/ReqSIgnUpType";
+import {ReqSignUpType} from "../../../types/authTypes/ReqSIgnUpType";
 import { ResetPassValidate } from '../../../utils/validation/ResetPassValidate';
 import {refresh, resetPass} from "../../../store/features/authReducer/Auth_api";
 import {useNavigate} from "react-router-dom";
