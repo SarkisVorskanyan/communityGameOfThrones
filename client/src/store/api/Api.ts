@@ -1,6 +1,6 @@
 
 import axios  from 'axios';
-import {SignInType} from "../../types/authType/SignInType";
+import {SignInType} from "../../types/authTypes/SignInType";
 import storageService from "../../utils/storageService/StorageService";
 
 const token: string | null = localStorage.getItem('token') ? localStorage.getItem('token') : null;

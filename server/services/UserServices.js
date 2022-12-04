@@ -59,6 +59,28 @@ class UserServices {
         await user.save()
     }
 
+    async getUsers(limit, offset){
+        const users = await UserModel.aggregate([
+            { "$facet": {
+                    "users": [
+                        { "$match": { }},
+                        { "$skip": offset },
+                        { "$limit": 5 }
+                    ],
+                    "totalCount": [
+                        { "$group": {
+                                "_id": null,
+                                "count": { "$sum": 1 }
+                            }}
+                    ]
+                }}
+        ])
+        return {
+            users: users[0]?.users,
+            totalCount: users[0].totalCount[0].count,
+        }
+    }
+
   
 }
 

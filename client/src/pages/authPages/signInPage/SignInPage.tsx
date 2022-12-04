@@ -6,8 +6,8 @@ import {SignUpValidate} from "../../../utils/validation/SignUpValidate";
 import CustomInput from "../../../components/common/inputs/customInput/CustomInput";
 import SubmitBtn from "../../../components/common/buttons/submitBtn/SubmitBtn";
 import {useAppDispatch, useAppSelector} from "../../../store/StoreHooks";
-import {ReqSignUpType} from "../../../types/authType/ReqSIgnUpType";
-import {ReqSignInType} from "../../../types/authType/ReqSignInType";
+import {ReqSignUpType} from "../../../types/authTypes/ReqSIgnUpType";
+import {ReqSignInType} from "../../../types/authTypes/ReqSignInType";
 import {SignInValidate} from "../../../utils/validation/SignInValidate";
 import { login } from '../../../store/features/authReducer/Auth_api';
 import './SignInPage.scss'
@@ -65,7 +65,7 @@ const SignInPage: FC = () => {
                                          touched={touched.password}
                                          type={'password'}
                                          name={'password'}
-                                         label={'Парол'} >
+                                         label={'Пароль'} >
                                 <ErrorMessage name={'password'}>
                                     {(errorMsg => <p className={'errorText'}>{errorMsg}</p>)}
                                 </ErrorMessage>

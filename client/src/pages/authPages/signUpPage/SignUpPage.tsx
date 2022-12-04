@@ -3,7 +3,7 @@ import CustomInput from '../../../components/common/inputs/customInput/CustomInp
 import FormTitle from '../../../components/common/titles/FormTitle'
 import './SignUpPage.scss'
 import {ErrorMessage, Formik} from 'formik';
-import { ReqSignUpType } from '../../../types/authType/ReqSIgnUpType'
+import { ReqSignUpType } from '../../../types/authTypes/ReqSIgnUpType'
 import { SignUpValidate } from './../../../utils/validation/SignUpValidate';
 import SubmitBtn from '../../../components/common/buttons/submitBtn/SubmitBtn';
 import Spinner from '../../../components/common/loading/spinner/Spinner';
@@ -62,7 +62,7 @@ const SignUpPage: FC = () => {
                                              touched={touched.password}
                                              type={'password'}
                                              name={'password'}
-                                             label={'Парол'} >
+                                             label={'Пароль'} >
                                     <ErrorMessage name={'password'}>
                                         {(errorMsg => <p className={'errorText'}>{errorMsg}</p>)}
                                     </ErrorMessage>
@@ -75,7 +75,7 @@ const SignUpPage: FC = () => {
                                              touched={touched.confirmPassword}
                                              type={'password'}
                                              name={'confirmPassword'}
-                                             label={'Пофторите парол'} >
+                                             label={'Повторите пароль'} >
                                     <ErrorMessage name={'confirmPassword'}>
                                         {(errorMsg => <p className={'errorText'}>{errorMsg}</p>)}
                                     </ErrorMessage>
