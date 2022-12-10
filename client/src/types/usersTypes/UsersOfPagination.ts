@@ -5,3 +5,7 @@ export interface UsersOfPagination{
     totalCount: number
 }
 
+// export interface UsersOfPagination{
+//     users: UserType[],
+// }
+
