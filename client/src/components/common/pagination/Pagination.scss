@@ -1,0 +1,36 @@
+@import "../../../styles/Variables.scss";
+@import "../../../styles/@mixin.scss";
+
+.pagesBlock{
+  width: 80%;
+  height: 30px;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .pageNumber{
+    height: 25px;
+    border: 1px solid #201313;
+    font-size: 18px;
+    color: white;
+    @include spaceAroundContainer();
+    padding: 0 8px;
+    background-color: $mainColor;
+    cursor: pointer;
+    margin: 0 8px;
+    border-radius: 25%;
+    &:hover{
+      color: black;
+      transform: scale(1.2);
+      background-color: $orangeColor;
+    }
+  }
+  .activePage{
+    @extend .pageNumber;
+    background-color: $orangeColor;
+  }
+  .disabled{
+    background: grey;
+    color: #fff;
+  }
+}

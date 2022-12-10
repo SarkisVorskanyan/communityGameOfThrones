@@ -3,9 +3,9 @@
 
 
 .sideBar_container{
-    position: fixed;
+    position: absolute;
     width: 25%;
-    height: 100vh;
+    height: 200vh;
     background: $mainColor;
     transform: translateX(-80%);
     transition: all 0.9s;
