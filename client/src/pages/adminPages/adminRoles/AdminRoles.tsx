@@ -42,12 +42,6 @@ const AdminRoles: FC = () => {
                             <p className={'errorText'} style={{fontSize: 18}}>{validateError}</p>
                         </DefaultInput>
                     </div>
-
-                    {/*<CustomInput handleChange={(e) => handleChange(e)}*/}
-                    {/*             value={value}*/}
-                    {/*             label={'email'} >*/}
-                    {/*    <p className={'errorText'}>{validateError}</p>*/}
-                    {/*</CustomInput>*/}
                 </div>
                 <UsualBtn onClick={(e: React.MouseEvent) => addRole(e)} label={'Создать'} />
             </form>

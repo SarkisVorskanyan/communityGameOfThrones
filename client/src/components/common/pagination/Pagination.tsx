@@ -1,6 +1,5 @@
 import React, {FC, useEffect, useState} from 'react';
 import './Pagination.scss'
-import ReactPaginate from 'react-paginate';
 
 
 interface PaginationProps {

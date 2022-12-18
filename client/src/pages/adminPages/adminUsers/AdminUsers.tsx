@@ -18,7 +18,6 @@ const AdminUsers: FC = () => {
 
 
     const changePage = (selectedPage: number) => {
-        console.log(selectedPage, ' selectedPage')
         setCurrentPage(selectedPage)
         dispatch(fetchUsers({limit: 5, page: selectedPage}))
     }
