@@ -4,7 +4,6 @@ import './SideBar.scss'
 import {IoIosArrowDown} from 'react-icons/io';
 import {NavLink, useNavigate} from 'react-router-dom';
 import {SideBarDataType} from './../../types/data/SideBarDataTypes/SideBarDataType';
-import {useAppDispatch} from './../../store/StoreHooks';
 import {checkSuccess} from '../../helpers/customHelpers/CustomHelpers';
 import useOnClickOutSide from '../../helpers/customHooks/UseOnClickOutSide'
 import {SideBarData} from '../../utils/constants/SidebarData/SideBarData';
@@ -12,11 +11,10 @@ import {SideBarData} from '../../utils/constants/SidebarData/SideBarData';
 
 const SideBar: FC = () => {
     const {toggleSideBar} = useAppSelector(state => state.settings)
-    const {userInfo, isAuth} = useAppSelector(state => state.auth)
+    const {userInfo} = useAppSelector(state => state.auth)
     const [subMenuId, setSubMenuId] = useState<number | null>(null)
     const ref = useRef<any>()
     const navigation = useNavigate()
-    const dispatch = useAppDispatch()
 
 
     const openOrCloseSubMenu = (item: SideBarDataType, index: number) => {
