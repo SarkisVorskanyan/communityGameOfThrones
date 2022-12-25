@@ -28,7 +28,7 @@ const Header: FC <HeaderProps> = ({showSideBar}) => {
             </div>
             <div className='rightSide_header'>
                 {isAuth ? <div className={'avatar'}>
-                    <UserAvatar name={userInfo?.nickname} size={70}/>
+                    <UserAvatar name={userInfo?.nickname} size={'70'}/>
                 </div> : null}
                 <div className='auth_btn'>
                     <BiCaretDown strokeWidth="1" stroke={'white'} size='2rem' />

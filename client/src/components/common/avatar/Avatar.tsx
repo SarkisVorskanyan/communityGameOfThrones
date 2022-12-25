@@ -3,13 +3,13 @@ import Avatar from 'react-avatar';
 
 interface AvatarProps {
     name: string | undefined,
-    size: number
+    size: string
 }
 
 const UserAvatar: FC <AvatarProps> = ({name, size}) => {
 
     return (
-        <Avatar name={name} size={size} round="50%" />
+        <Avatar name={name} size={'80'} round="50%" />
     )
 }
 

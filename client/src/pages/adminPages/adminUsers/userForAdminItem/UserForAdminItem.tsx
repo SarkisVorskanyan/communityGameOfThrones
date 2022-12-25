@@ -30,7 +30,7 @@ const UserForAdminItem: FC <UserForAdminItemProps> = ({currentItems}) => {
             <div className={'user_admin_container'} key={index}>
                 <div className={'avatar_block'}>
                     <div className={'avatar'}>
-                        <UserAvatar name={item?.nickname} size={80} />
+                        <UserAvatar name={item?.nickname} size={'80'} />
                     </div>
                     <h3>{item?.nickname}</h3>
                 </div>
