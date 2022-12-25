@@ -48,7 +48,7 @@ function App() {
       <Toaster />
       <Header showSideBar={showSideBar} />
       {showSideBar && <SideBar />}
-      <div style={{padding: !showSideBar ? '40px 4% 40px 8%' : toggleSideBar ? '40px 8% 40px 23%' : '40px 4% 40px 8%'}}>
+      <div style={{padding: !showSideBar ? '130px 4% 40px 8%' : toggleSideBar ? '130px 8% 40px 23%' : '130px 4% 40px 8%'}}>
         <Routes>
             {/* Auth pages */}
             <Route path='/signUp' element={isAuth ? <Navigate to='/' /> : <SignUpPage />} />

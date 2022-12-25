@@ -4,6 +4,9 @@
 .header_container{
     background-color: $mainColor;
     border: 1px solid;
+    position: fixed;
+    width: 100%;
+    z-index: 9;
     @include spaceBetweenContainer();
     .leftSide_header{
         padding: 20px 40px;

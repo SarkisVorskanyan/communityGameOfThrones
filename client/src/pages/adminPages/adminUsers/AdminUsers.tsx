@@ -13,13 +13,13 @@ const AdminUsers: FC = () => {
     const [currentPage, setCurrentPage] = useState<number>(1)
 
     useEffect(() => {
-        dispatch(fetchUsers({limit: 5, page: 1}))
+        dispatch(fetchUsers({limit: 10, page: 1}))
     }, [])
 
 
     const changePage = (selectedPage: number) => {
         setCurrentPage(selectedPage)
-        dispatch(fetchUsers({limit: 5, page: selectedPage}))
+        dispatch(fetchUsers({limit: 10, page: selectedPage}))
     }
 
 

@@ -43,10 +43,10 @@ class UserServices {
         if(!userData || !tokenFromDB){
             throw ApiError.UnauthorizedError()
         }
-        const user = await UserModel.findById(userData.id);
+        const user = await UserModel.findById(userData._id);
         const userDto = new User_dto(user);
         const tokens = tokenServices.generateTokens({...userDto});
-        await tokenServices.saveToken(userDto.id, tokens.refreshToken);
+        await tokenServices.saveToken(userDto._id, tokens.refreshToken);
         return {...tokens, user: userDto}
     }
 
@@ -65,7 +65,7 @@ class UserServices {
                     "users": [
                         { "$match": { }},
                         { "$skip": offset },
-                        { "$limit": 5 }
+                        { "$limit": 10 }
                     ],
                     "totalCount": [
                         { "$group": {
