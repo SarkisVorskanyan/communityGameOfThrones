@@ -16,16 +16,14 @@ const Pagination: FC <PaginationProps> = ({
                                           }) => {
 
     const toPrev = (): void => {
-        console.log('to Prev')
         setPortionNumber(portionNumber - 1)
     }
 
     const toNext = (): void => {
-        console.log('to Next')
         setPortionNumber(portionNumber + 1)
     }
 
-    let pageCount: number = Math.ceil(totalCount / 5 );
+    let pageCount: number = Math.ceil(totalCount / 10 );
 
     let pages = [];
 
@@ -40,10 +38,6 @@ const Pagination: FC <PaginationProps> = ({
     let leftPortionPageNumber: number = (portionNumber - 1) * portionSize + 1;
     let rightPortionPageNumber: number = portionNumber * portionSize;
 
-    useEffect(() => {
-        console.log(portionNumber, ' portionNumber')
-        console.log(portionCount, ' portionCount')
-    }, [portionCount, portionNumber])
 
     return (
 

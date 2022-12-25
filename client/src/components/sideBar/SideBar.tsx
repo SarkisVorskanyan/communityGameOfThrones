@@ -39,6 +39,10 @@ const SideBar: FC = () => {
 
     const navigateTo = (url: string) => {
         navigation(url)
+        if(!toggleSideBar){
+            setSubMenuId(null)
+        }
+
     }
 
 

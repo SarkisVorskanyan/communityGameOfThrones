@@ -28,7 +28,6 @@ class AuthController {
                 return res.status(422).json({message: VALIDATION_ERROR, errors})
             }
             const {email, password, nickname} = req.body
-            console.log(req.body,  ' req.body')
             await UserServices.checkAuth(email, nickname)
             const hashPassword = await bcrypt.hash(password, 3)
             const activationLink = uuid.v4()

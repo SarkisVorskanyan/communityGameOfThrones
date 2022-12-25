@@ -11,7 +11,6 @@ export const fetchUsers = createAsyncThunk(
     async (data: PaginationType, thunkAPI) => {
         try{
             const response = await instance.get<UsersOfPagination>(`users/getUsers?limit=${data?.limit}&page=${data?.page}`)
-            console.log(response.data)
             return response.data
         }
         catch (e) {

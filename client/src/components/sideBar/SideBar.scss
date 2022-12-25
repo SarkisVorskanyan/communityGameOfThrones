@@ -3,12 +3,13 @@
 
 
 .sideBar_container{
-    position: absolute;
+    position: fixed;
     width: 25%;
-    height: 200vh;
     background: $mainColor;
     transform: translateX(-80%);
     transition: all 0.9s;
+    height: 100%;
+
 }
 
 .sideBar_container_active{
@@ -23,7 +24,7 @@
 .sidebar_subContainer{
     .nav-links{
         height: 100%;
-        padding: 30px 0 150px 0;
+        padding: 112px 0 150px 0;
         //overflow: hidden;
         li{
             padding: 0;
