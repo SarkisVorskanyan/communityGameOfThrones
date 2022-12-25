@@ -5,13 +5,14 @@ import { BiCaretDown } from "react-icons/bi";
 import { NavLink, useNavigate } from 'react-router-dom';
 import {useAppDispatch, useAppSelector} from "../../../store/StoreHooks";
 import {logOut, refresh} from "../../../store/features/authReducer/Auth_api";
+import UserAvatar from "../avatar/Avatar";
 
 interface HeaderProps{
     showSideBar: boolean
 }
 
 const Header: FC <HeaderProps> = ({showSideBar}) => {
-    const {isAuth} = useAppSelector(state => state.auth)
+    const {isAuth, userInfo} = useAppSelector(state => state.auth)
     const dispatch = useAppDispatch()
     const navigate = useNavigate();
 
@@ -26,6 +27,9 @@ const Header: FC <HeaderProps> = ({showSideBar}) => {
                 <NavLink to="/">Game of Thrones Community</NavLink>
             </div>
             <div className='rightSide_header'>
+                {isAuth ? <div className={'avatar'}>
+                    <UserAvatar name={userInfo?.nickname} size={70}/>
+                </div> : null}
                 <div className='auth_btn'>
                     <BiCaretDown strokeWidth="1" stroke={'white'} size='2rem' />
                     {/*<div className='auth_list'>*/}

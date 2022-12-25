@@ -17,6 +17,7 @@
         }
     }
     .rightSide_header{
+        display: flex;
         .auth_btn{
             height: 100%;
             width: 70px;
@@ -38,6 +39,9 @@
                   width: 100px;
                 }
             }
+        }
+        .avatar{
+            cursor: pointer;
         }
     }
 }    

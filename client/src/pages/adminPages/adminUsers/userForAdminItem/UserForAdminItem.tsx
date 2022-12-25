@@ -7,6 +7,8 @@ import { ImBlocked } from 'react-icons/im';
 import './UserForAdminItem.scss'
 import UsualBtn from "../../../../components/common/buttons/usualBtn/UsualBtn";
 import {checkSuccess} from "../../../../helpers/customHelpers/CustomHelpers";
+import Avatar from 'react-avatar';
+import UserAvatar from "../../../../components/common/avatar/Avatar";
 
 interface UserForAdminItemProps {
     currentItems: any
@@ -28,7 +30,7 @@ const UserForAdminItem: FC <UserForAdminItemProps> = ({currentItems}) => {
             <div className={'user_admin_container'} key={index}>
                 <div className={'avatar_block'}>
                     <div className={'avatar'}>
-                        {/*<img />*/}
+                        <UserAvatar name={item?.nickname} size={80} />
                     </div>
                     <h3>{item?.nickname}</h3>
                 </div>
